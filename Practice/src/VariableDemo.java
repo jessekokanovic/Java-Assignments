@@ -2,7 +2,7 @@
 public class VariableDemo {
 
 	public static void main(String[] args) {
-		
+		//demo for variables
 		int myAge; //declaration
 		myAge = 69; //initialisation
 		System.out.println(myAge); //usage
