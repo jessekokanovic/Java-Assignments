@@ -20,12 +20,23 @@ public class SalaryProcessor {
 			i++;
 		}
 		
+		//Calculate average salary by looping through the array and adding the salary values
+		double totalSalary = 0;
+		i = 0;
+		while(i < arraySize) {
+			totalSalary = totalSalary + salaries[i];
+			i++;
+		}
+		
+		//Total salary value divided by number of. You could round this value if you wanted to.
+		double averageSalary = totalSalary/arraySize;
 		
 		// Loop goes through indices 0, 1, 2
 		i = 0;
+		double salaryDifference;
 		while (i < arraySize) {
-		// Retrieve and display value at i (current element)
-			System.out.println("Salary for job " + jobs[i] + " is $" + salaries[i]);
+			salaryDifference = salaries[i] - averageSalary;
+			System.out.println("Salary for job " + jobs[i] + " is $" + salaries[i] + " which is $" + salaryDifference + " from the average.");
 			i = i + 1;
 		}
 	}
