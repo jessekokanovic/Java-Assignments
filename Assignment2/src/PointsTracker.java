@@ -42,15 +42,68 @@ public class PointsTracker {
 		// calculate average points, double is used to account for
 		// decimal places in average points.
 		double averagePoints = totalPoints / numberOfGames;
-		
-		//loop over the arrays and print the points scored on each date.
+
+		// loop over the arrays and print the points scored on each date.
 		i = 0;
+		System.out.println("Points scored for " + player);
 		while (i < numberOfGames) {
-			System.out.println("Points scored for" + player + ":\n" + pointsScored[i] + " points on " + gameDate[i]);
+			System.out.println(pointsScored[i] + " points on " + gameDate[i]);
 			i++;
 		}
-		//Print the average points.
-		System.out.println("Over " + numberOfGames + " games, " + player + " averaged " + averagePoints + " points per game.");
+		// Print the average points.
+		System.out.println(
+				"Over " + numberOfGames + " games, " + player + " averaged " + averagePoints + " points per game.");
+		// Get the best and worst game statistics to print
+		String bestAndWorstGame = getBestAndWorstGame(pointsScored, gameDate, numberOfGames);
+		System.out.println(bestAndWorstGame);
+	}
+
+	public static String getBestAndWorstGame(int points[], String dates[], int arraySize) {
+		// method to receive array of integers and arrange in ascending order.
+		// Refer to https://www.youtube.com/watch?v=cqh8nQwuKNE by Joe James as a
+		// starting point for this method.
+
+		int i = 0; // initialize loop counters.
+		int j = 0;
+		int minValue = 0; // set the minimum value to compare as zero
+		int minIndex = 0; // set the index of the minimum value to zero initially
+		int pointsToSwap; // temporarily hold value to rearrange in the array
+		String dateToSwap;
+
+		while (i < arraySize) {
+			// this while loop loops over the entire points array and assigns a minimum
+			// value and index that is later compared to other array values.
+			minValue = points[i];
+			minIndex = i;
+			j = i;
+			while (j < arraySize) {
+				// loop from index j to the end of the array, so only over values not already
+				// tested
+				if (points[j] < minValue) {
+					// if the next value is smaller than the current minimum, assign a new minimum
+					// value and index.
+					minValue = points[j];
+					minIndex = j;
+				}
+				j++;
+			}
+			if (minValue < points[i]) {
+				// if the new minimum value found is smaller than the spot we are up to in the
+				// array, switch the places of the two values.
+				pointsToSwap = points[i];
+				points[i] = points[minIndex];
+				points[minIndex] = pointsToSwap;
+				dateToSwap = dates[i];
+				dates[i] = dates[minIndex];
+				dates[minIndex] = dateToSwap;
+
+			}
+			i++;
+		}
+		// return a string stating the highest points scored lowest points scored.
+		String bestAndWorstGame = "The best game was on " + dates[arraySize - 1] + " with " + points[arraySize - 1]
+				+ " points.\nThe worst game was on " + dates[0] + " with " + points[0] + " points.";
+		return bestAndWorstGame;
 	}
 
 }
