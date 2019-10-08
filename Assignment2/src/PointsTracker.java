@@ -23,7 +23,8 @@ public class PointsTracker {
 		// Populate the arrays with data retrieved from the user.
 		int i = 0;
 		// loop over the array the numberOfGames times, ask the user to enter
-		// information for both the date and points scored.
+		// information for both the date and points scored. If the user enters the wrong
+		// data type the program will crash
 		while (i < numberOfGames) {
 			gameDate[i] = JOptionPane.showInputDialog("Enter the game date (dd/mm):");
 			pointsScored[i] = Integer.parseInt(JOptionPane.showInputDialog("Enter the points scored:"));
@@ -54,17 +55,21 @@ public class PointsTracker {
 		System.out.println(
 				"Over " + numberOfGames + " games, " + player + " averaged " + averagePoints + " points per game.");
 		// Get the best and worst game statistics to print
-		//String bestAndWorstGame = getBestAndWorstGame(pointsScored, gameDate, numberOfGames);
+		// String bestAndWorstGame = getBestAndWorstGame(pointsScored, gameDate,
+		// numberOfGames);
 		PointsTracker sortedPPG = new PointsTracker();
 		String bestAndWorstGame = sortedPPG.getBestAndWorstGame(pointsScored, gameDate, numberOfGames);
 		System.out.println(bestAndWorstGame);
-		
+
 	}
 
 	public String getBestAndWorstGame(int points[], String dates[], int arraySize) {
 		// method to receive array of integers and arrange in ascending order.
 		// Refer to https://www.youtube.com/watch?v=cqh8nQwuKNE by Joe James as a
 		// starting point for this method.
+		// instead of returning a string it might be more useful to return the sorted
+		// arrays, but am unsure of how to return two values. Maybe 2 separate methods
+		// are required.
 
 		int i = 0; // initialize loop counters.
 		int j = 0;
