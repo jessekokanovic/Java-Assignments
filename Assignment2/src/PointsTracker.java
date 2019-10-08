@@ -65,8 +65,9 @@ public class PointsTracker {
 
 	public String getBestAndWorstGame(int points[], String dates[], int arraySize) {
 		// method to receive array of integers and arrange in ascending order.
-		// Refer to https://www.youtube.com/watch?v=cqh8nQwuKNE by Joe James as a
-		// starting point for this method.
+		// James, "Java: SelectionSort animated demo with code", YouTube, 2019.
+		// [Online]. Available: https://www.youtube.com/watch?v=cqh8nQwuKNE. [Accessed:
+		// 08- Oct- 2019]. Video used as help with selection sorting algorithm. 
 		// instead of returning a string it might be more useful to return the sorted
 		// arrays, but am unsure of how to return two values. Maybe 2 separate methods
 		// are required.
