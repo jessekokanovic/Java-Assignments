@@ -3,83 +3,54 @@ import javax.swing.JOptionPane;
 public class PointsTracker {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		double[] salaries; //empty array
-		String[] jobs;
-		int arraySize = Integer.parseInt(JOptionPane.showInputDialog("How many salaries?")); //get the size of the array from the user.
-		//test to see if user is entering a positive number.
-		while(arraySize < 0) {
-			arraySize = Integer.parseInt(JOptionPane.showInputDialog("Please enter a postive integer:"));
+
+		// Initialize variable for player name and empty array structures for games and
+		// points scored.
+		String player = JOptionPane.showInputDialog("What is the Player's name?");
+		int numberOfGames = Integer.parseInt(JOptionPane.showInputDialog("How many games did they play?"));
+		while (numberOfGames < 0) {
+			// Make sure the user is entering a positive integer as you can't play a
+			// negative number of basketball games.
+			numberOfGames = Integer.parseInt(JOptionPane.showInputDialog("Please enter a positive integer:"));
 		}
-		
-		salaries = new double[arraySize]; //initialise array with size determined by user
-		jobs = new  String[arraySize];
-		//Get the job names and salaries from the user.
+		// Initialize arrays to hold the game date and points scored, and make them
+		// equal in length to the number of games played.
+		int pointsScored[];
+		String gameDate[];
+		pointsScored = new int[numberOfGames];
+		gameDate = new String[numberOfGames];
+
+		// Populate the arrays with data retrieved from the user.
 		int i = 0;
-		while(i < arraySize) {
-			jobs[i] = JOptionPane.showInputDialog("Enter the Job:");
-			salaries[i] = Double.parseDouble(JOptionPane.showInputDialog("Enter the salary:"));
+		// loop over the array the numberOfGames times, ask the user to enter
+		// information for both the date and points scored.
+		while (i < numberOfGames) {
+			gameDate[i] = JOptionPane.showInputDialog("Enter the game date (dd/mm):");
+			pointsScored[i] = Integer.parseInt(JOptionPane.showInputDialog("Enter the points scored:"));
 			i++;
 		}
-		
-		//Calculate average salary by looping through the array and adding the salary values
-		double totalSalary = 0;
+
+		// Calculate the average points scored by summing the pointsScored array and
+		// dividing by numberOfGames.
 		i = 0;
-		while(i < arraySize) {
-			totalSalary = totalSalary + salaries[i];
+		int totalPoints = 0; // contains the summation of the pointsScored array.
+		// loop over the array and add the current value to the totalPoints variable.
+		while (i < numberOfGames) {
+			totalPoints = totalPoints + pointsScored[i];
 			i++;
 		}
+		// calculate average points, double is used to account for
+		// decimal places in average points.
+		double averagePoints = totalPoints / numberOfGames;
 		
-		//Total salary value divided by number of. You could round this value if you wanted to.
-		double averageSalary = totalSalary/arraySize;	
-		
-		//Sort in ascending order using selection method.
-		//Method obtained using https://www.youtube.com/watch?v=cqh8nQwuKNE by Joe James as a guide.
+		//loop over the arrays and print the points scored on each date.
 		i = 0;
-		int j = 0;
-		double minValue = 0; //minimum value in the array
-		int minIndex = 0; //index of the minimum value in the array
-		double swappedSalary = 0; //store a salary value temporarily so that we can exchange places in array
-		String swappedJob; //store the string we need to swap places with
-		
-		
-		//outer loop which will loop over the entire array. This assigns the first element in the array as the 
-		//initial minimum value to be tested against the other elements.
-		while(i < arraySize) {
-			minValue = salaries[i];
-			minIndex = i;
-			j = i;
-			//inner loop will determine if we have the correct minimum value by comparing the current minimum value against the next 
-			//element (j) in the array. If the element is smaller, is is assigned as the new minimum.
-			//this while loop only loops over values that haven't been sorted already.
-			while(j < arraySize) {
-				if(salaries[j] < minValue) {
-					minValue = salaries[j];
-					minIndex = j;
-				}
-				j++;
-			}
-			//if the minimum value found above is smaller than the current position in the array (i from the outer loop) swap the two values.
-			if(minValue < salaries[i]) {
-				swappedSalary = salaries[i];
-				salaries[i] = salaries[minIndex];
-				salaries[minIndex] = swappedSalary;
-				swappedJob = jobs[i];
-				jobs[i] = jobs[minIndex];
-				jobs[minIndex] = swappedJob;
-			}
-			i++;		
+		while (i < numberOfGames) {
+			System.out.println("Points scored for" + player + ":\n" + pointsScored[i] + " points on " + gameDate[i]);
+			i++;
 		}
-		
-		
-		//Loop over the array and print the information.
-		i = 0;
-		double salaryDifference;
-		while (i < arraySize) {
-			salaryDifference = salaries[i] - averageSalary;
-			System.out.println("Salary for job " + jobs[i] + " is $" + salaries[i] + " which is $" + salaryDifference + " from the average.");
-			i = i + 1;
-		}
+		//Print the average points.
+		System.out.println("Over " + numberOfGames + " games, " + player + " averaged " + averagePoints + " points per game.");
 	}
 
 }
