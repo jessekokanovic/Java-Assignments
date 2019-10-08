@@ -54,11 +54,14 @@ public class PointsTracker {
 		System.out.println(
 				"Over " + numberOfGames + " games, " + player + " averaged " + averagePoints + " points per game.");
 		// Get the best and worst game statistics to print
-		String bestAndWorstGame = getBestAndWorstGame(pointsScored, gameDate, numberOfGames);
+		//String bestAndWorstGame = getBestAndWorstGame(pointsScored, gameDate, numberOfGames);
+		PointsTracker sortedPPG = new PointsTracker();
+		String bestAndWorstGame = sortedPPG.getBestAndWorstGame(pointsScored, gameDate, numberOfGames);
 		System.out.println(bestAndWorstGame);
+		
 	}
 
-	public static String getBestAndWorstGame(int points[], String dates[], int arraySize) {
+	public String getBestAndWorstGame(int points[], String dates[], int arraySize) {
 		// method to receive array of integers and arrange in ascending order.
 		// Refer to https://www.youtube.com/watch?v=cqh8nQwuKNE by Joe James as a
 		// starting point for this method.
