@@ -55,8 +55,19 @@ public class MusicLibraryW7 {
 			i = ignoreCase(title, i);
 			if (i < this.currentNumSongs) {
 				JOptionPane.showMessageDialog(null, "There is already a song titled '" + title + "'");
-				JOptionPane.showInputDialog(null, "Enter a location other than " + this.songLocations[i] + " to save song");
-				
+				String tempLocation = JOptionPane.showInputDialog("Enter a location other than " + this.songLocations[i] + " to save song:");
+				int check = 0;
+				while(check == 0) {
+					 if (tempLocation == this.songLocations[i]) {
+						 tempLocation = JOptionPane.showInputDialog("Enter a location other than " + this.songLocations[i] + " to save song:");
+					 }
+					 else {
+						 check = 1;
+					 }
+				}
+				this.songTitles[this.currentNumSongs] = title;
+				this.songLocations[this.currentNumSongs] = tempLocation;
+				this.currentNumSongs += 1;
 			
 			}
 			else {
