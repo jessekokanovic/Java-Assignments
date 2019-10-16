@@ -7,9 +7,9 @@ public class MusicLibraryW7 {
 	private String[] songLocations;
 	private int currentNumSongs;
 
-	public MusicLibraryW7() {
-
-		this.maxNumSongs = 3;
+	public MusicLibraryW7(int maxSongs) {
+		
+		this.maxNumSongs = maxSongs;
 		this.songTitles = new String[maxNumSongs];
 		this.songLocations = new String[maxNumSongs];
 		this.currentNumSongs = 0;
@@ -38,11 +38,13 @@ public class MusicLibraryW7 {
 			menuChoiceString = JOptionPane.showInputDialog(menu);
 		}
 	}
+	
 
 	public static void main(String[] args) {
 
 		MusicLibraryW7 ml;
-		ml = new MusicLibraryW7();
+		int maxSongs = Integer.parseInt(JOptionPane.showInputDialog("Enter the maximum number of songs"));
+		ml = new MusicLibraryW7(maxSongs);
 
 	}
 
@@ -51,8 +53,12 @@ public class MusicLibraryW7 {
 			String title = JOptionPane.showInputDialog("Enter a song title");
 			int i = 0;
 			i = ignoreCase(title, i);
-			if (i < this.currentNumSongs)
+			if (i < this.currentNumSongs) {
 				JOptionPane.showMessageDialog(null, "There is already a song titled '" + title + "'");
+				JOptionPane.showInputDialog(null, "Enter a location other than " + this.songLocations[i] + " to save song");
+				
+			
+			}
 			else {
 				String location = JOptionPane.showInputDialog("Enter song location for '" + title + "'");
 				this.songTitles[this.currentNumSongs] = title;
@@ -60,8 +66,9 @@ public class MusicLibraryW7 {
 				this.currentNumSongs += 1;
 			}
 		}
-		JOptionPane.showMessageDialog(null, "Oops! Looks like you have no more room for new songs");
-
+		else {
+			JOptionPane.showMessageDialog(null, "Oops! Looks like you have no more room for new songs");
+		}
 	}
 
 	public int ignoreCase(String title, int i) {
