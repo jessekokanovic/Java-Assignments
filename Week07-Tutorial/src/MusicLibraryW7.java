@@ -50,8 +50,7 @@ public class MusicLibraryW7 {
 		if (this.currentNumSongs < this.maxNumSongs) {
 			String title = JOptionPane.showInputDialog("Enter a song title");
 			int i = 0;
-			while (i < this.currentNumSongs && !this.songTitles[i].equalsIgnoreCase(title))
-				i += 1;
+			i = ignoreCase(title, i);
 			if (i < this.currentNumSongs)
 				JOptionPane.showMessageDialog(null, "There is already a song titled '" + title + "'");
 			else {
@@ -65,6 +64,14 @@ public class MusicLibraryW7 {
 
 	}
 
+	public int ignoreCase(String title, int i) {
+		//method for the repeated while loop
+		while (i < this.currentNumSongs && !this.songTitles[i].equalsIgnoreCase(title)) {
+			i =+ 1;
+		}
+		return i;
+	}
+	
 	public void displaySongs() {
 
 		String message = "Song List:\n\n";
@@ -81,9 +88,7 @@ public class MusicLibraryW7 {
 
 		String targetTitle = JOptionPane.showInputDialog("Enter a song title to search");
 		int i = 0;
-		while (i < this.currentNumSongs && !this.songTitles[i].equalsIgnoreCase(targetTitle))
-			i += 1;
-
+		i = ignoreCase(targetTitle, i);
 		if (i < this.currentNumSongs) {
 			// ---------------------------------------------------------------
 			// For ITP, you do not need to understand how the code segment below works.
