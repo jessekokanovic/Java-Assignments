@@ -2,34 +2,32 @@ import javax.swing.JOptionPane;
 
 public class RennovationProjectManager {
 
-	public static void main(String[] args) {
-		double wallArea = 0, cost, height, length, costPerSqm;
+	public RennovationProjectManager() {
+
 		int selection;
-		String tempInput, wallNames;
+		String tempInput;
 		String menu = "Menu:\n";
 		menu += "1. Calculate paint required for a wall\n"; // string to hold menu selections
 		menu += "2. Calculate paint required for project";
 		tempInput = JOptionPane.showInputDialog(menu); // get the menu selection from the user
 
-		// Initialise an object so that we may call methods.
-		RennovationProjectManager house;
-		house = new RennovationProjectManager();
-
 		// This loop continues to run as long as the user supplies another menu option,
 		// program will exit if no option is supplied.
 		while (tempInput != null) {
-			selection = Integer.parseInt(tempInput); // parse the selection as an integer.
+			selection = Integer.parseInt(tempInput);
+
+			// parse the selection as an integer.
 			// if the user selects 1, calculate the paint required for a wall.
 			// get the height, length, name and cost/sqm from the user and calculate total
 			// dollars,
 			if (selection == 1) {
 
-				house.calculateWall();
+				calculateWall();
 			}
 			// if the user selects 2, calculate the paint required for a whole project.
 			// get the height, length, name and cost for each wall and add them together
 			else if (selection == 2) {
-				house.calculateProject();
+				calculateProject();
 			}
 			// if 1 or 2 is not input, display error message.
 			else {
@@ -39,6 +37,14 @@ public class RennovationProjectManager {
 			// get another menu selection from the user
 			tempInput = JOptionPane.showInputDialog(menu);
 		}
+	}
+
+	public static void main(String[] args) {
+		// we only need to create the object so it can run its contructor method in the
+		// main function.
+		RennovationProjectManager obj;
+		obj = new RennovationProjectManager();
+
 	}
 
 	public void calculateWall() {
