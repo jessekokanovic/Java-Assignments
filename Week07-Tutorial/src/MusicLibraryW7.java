@@ -8,7 +8,7 @@ public class MusicLibraryW7 {
 	private int currentNumSongs;
 
 	public MusicLibraryW7(int maxSongs) {
-		
+		//constructor to initialise arrays and call class method depending on user input. 
 		this.maxNumSongs = maxSongs;
 		this.songTitles = new String[maxNumSongs];
 		this.songLocations = new String[maxNumSongs];
@@ -41,7 +41,7 @@ public class MusicLibraryW7 {
 	
 
 	public static void main(String[] args) {
-
+	// create a new music library object and gather the max number of songs from the user.
 		MusicLibraryW7 ml;
 		int maxSongs = Integer.parseInt(JOptionPane.showInputDialog("Enter the maximum number of songs"));
 		ml = new MusicLibraryW7(maxSongs);
@@ -49,14 +49,33 @@ public class MusicLibraryW7 {
 	}
 
 	public void addSong() {
-		if (this.currentNumSongs < this.maxNumSongs) {
+		
+		// if the user tries to add a new song more than max number, extend the array by doubling it.
+		if(this.currentNumSongs >= this.maxNumSongs) {
+			String[] extendedSongTitles = new String[this.maxNumSongs*2];
+			String[] extendedSongLocations = new String[extendedSongTitles.length];
+			int i = 0;
+			while (i < this.maxNumSongs) {
+				extendedSongTitles[i] = this.songTitles[i];
+				extendedSongLocations[i] = this.songLocations[i];
+				i+=1;
+			}
+			this.songTitles = extendedSongTitles;
+			this.songLocations = extendedSongLocations;
+			this.maxNumSongs = extendedSongTitles.length;
+		}
+			
+			//get the title and location of the song and add it to the array.
 			String title = JOptionPane.showInputDialog("Enter a song title");
 			int i = 0;
-			i = ignoreCase(title, i);
+			i = getIndex(title, i);
 			if (i < this.currentNumSongs) {
 				JOptionPane.showMessageDialog(null, "There is already a song titled '" + title + "'");
 				String tempLocation = JOptionPane.showInputDialog("Enter a location other than " + this.songLocations[i] + " to save song:");
+				
 				int check = 0;
+				//this should loop until the user puts in a different location but it just continues regardless, i can't figure out why. In its current state
+				//this will add a duplicate if the user enters the same location.
 				while(check == 0) {
 					 if (tempLocation == this.songLocations[i]) {
 						 tempLocation = JOptionPane.showInputDialog("Enter a location other than " + this.songLocations[i] + " to save song:");
@@ -77,13 +96,9 @@ public class MusicLibraryW7 {
 				this.currentNumSongs += 1;
 			}
 		}
-		else {
-			JOptionPane.showMessageDialog(null, "Oops! Looks like you have no more room for new songs");
-		}
-	}
 
-	public int ignoreCase(String title, int i) {
-		//method for the repeated while loop
+	public int getIndex(String title, int i) {
+		//method for the repeated while loop to get the index of the song title.
 		while (i < this.currentNumSongs && !this.songTitles[i].equalsIgnoreCase(title)) {
 			i =+ 1;
 		}
@@ -91,7 +106,7 @@ public class MusicLibraryW7 {
 	}
 	
 	public void displaySongs() {
-
+		//list the song and locations
 		String message = "Song List:\n\n";
 		int i = 0;
 		while (i < this.currentNumSongs) {
@@ -106,7 +121,7 @@ public class MusicLibraryW7 {
 
 		String targetTitle = JOptionPane.showInputDialog("Enter a song title to search");
 		int i = 0;
-		i = ignoreCase(targetTitle, i);
+		i = getIndex(targetTitle, i);
 		if (i < this.currentNumSongs) {
 			// ---------------------------------------------------------------
 			// For ITP, you do not need to understand how the code segment below works.
