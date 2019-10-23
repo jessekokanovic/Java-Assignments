@@ -144,7 +144,7 @@ public class MusicLibrary {
 
 	public static void main(String[] args) {
 
-		MusicLibrary ml = new MusicLibrary(1);
+		MusicLibrary ml = new MusicLibrary(100);
 
 	}
 
