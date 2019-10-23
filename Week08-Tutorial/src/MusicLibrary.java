@@ -33,7 +33,7 @@ public class MusicLibrary {
 					extendMaxSongs();
 				}
 				
-				
+				addSong();
 			}
 
 			menuChoiceString = JOptionPane.showInputDialog(menu);
@@ -54,7 +54,37 @@ public class MusicLibrary {
 	}
 	
 	public void addSong() {
-
+		String title = JOptionPane.showInputDialog("Enter a song title:");
+		int i = 0;
+		i = getIndex(title, i);
+		if (i < this.currentNumSongs) {
+			//if the new song already exists, make the user pick a different location.
+			JOptionPane.showMessageDialog(null, "There is already a song titled '" + title + "'");
+			String tempLocation = JOptionPane.showInputDialog("Enter a location other than " + this.songs[i].getLocation() + " to save song:");
+			while (tempLocation ==  this.songs[i].getLocation()) {
+				tempLocation = JOptionPane.showInputDialog("Enter a location other than " + this.songs[i].getLocation() + " to save song:");
+			}
+			Song newSong = new Song(title, tempLocation); //create a new song object and add it to the songs array.
+			this.songs[this.currentNumSongs] = newSong;
+			this.currentNumSongs +=1;
+			
+		}
+		else {
+			//else if the song doesn't already exist just take input from the user and create a new song object.
+			String location = JOptionPane.showInputDialog("Enter song location for '" + title + "'");
+			Song newSong = new Song(title, location); //create a new song object and add it to the songs array.
+			this.songs[this.currentNumSongs] = newSong;
+			this.currentNumSongs +=1;
+		}
+		
+	}
+	
+	public int getIndex(String title, int i) {
+		//if the song already exists, find the index of it and return it
+		while (i < this.currentNumSongs && !this.songs[i].getTitle().equalsIgnoreCase(title)) {
+			i =+ 1;
+		}
+		return i;
 	}
 
 	public static void main(String[] args) {
