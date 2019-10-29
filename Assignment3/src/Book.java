@@ -16,12 +16,12 @@ public class Book {
 	
 	public String getTitle() {
 		//Get the title of a book and return it as a string
-		return this.getTitle();
+		return this.title;
 	}
 	
 	public String getAuthor() {
 		//Get the author of a book and return it as a string
-		return this.getAuthor();
+		return this.author;
 	}
 	
 	public int getPages(){
