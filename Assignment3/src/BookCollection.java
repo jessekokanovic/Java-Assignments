@@ -20,10 +20,35 @@ public class BookCollection {
 																						// where it is saved.
 		this.collectionLength = getCollectionLength(); // run the getCollectionLength method to get the initial number
 														// of books in the collection
-		this.bookCollection = loadBooks();
+		this.bookCollection = loadBooks(); //load the information from the csv file into book objects stored in this list.
 
-		// Display the collection
-		displayCollection();
+		String menu = "[1] Display Collection\n[2] Add Book\n[3] Update Pages Read\n[4] Save Collection and Close";
+		
+		String userChoiceString = JOptionPane.showInputDialog(menu);
+		while(userChoiceString != null) {
+			int userChoice = Integer.parseInt(userChoiceString);
+			if(userChoice == 1) {
+				//List the information of the books in the collection by running the displayCollection method.
+				JOptionPane.showMessageDialog(null, "Number of Books: " + this.collectionLength + "\n" + displayCollection());
+				
+			}
+			else if(userChoice == 2) {
+				
+			}
+			else if(userChoice == 3) {
+				
+			}
+			else if(userChoice == 4) {
+				
+			}
+			else {
+				//If none of the correct menu options are selected display an error message.
+				JOptionPane.showMessageDialog(null, "Please enter a valid option");
+			}
+			
+			userChoiceString = JOptionPane.showInputDialog(menu);
+		}
+		
 	}
 
 	public int getCollectionLength() {
@@ -74,22 +99,19 @@ public class BookCollection {
 		return loadedCollection;
 	}
 
-	public void displayCollection() {
+	public String displayCollection() {
 		// Loop over the collection array and format the book information into a string
 		// readable by the user.
 
 		String collection = "";
 		int i = 0;
 		while (i < this.collectionLength) {
-			collection = collection + this.bookCollection[i].getTitle() + " by " + this.bookCollection[i].getAuthor()
-					+ ", " + this.bookCollection[i].getPagesRead() + " pages read out of " + this.bookCollection[i].getPagesRead()
-					+ ".\n";
+			collection = collection + "[" + (i + 1) + "] " + this.bookCollection[i].getTitle() + " by "
+					+ this.bookCollection[i].getAuthor() + ", " + this.bookCollection[i].getPagesRead()
+					+ " pages read out of " + this.bookCollection[i].getPages() + ".\n";
 			i++;
 		}
-
-		JOptionPane.showMessageDialog(null,
-				"Books in Collection: " + this.collectionLength + "\n" + collection);
-
+		return collection;
 	}
 
 }
