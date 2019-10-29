@@ -82,8 +82,8 @@ public class BookCollection {
 		int i = 0;
 		while (i < this.collectionLength) {
 			collection = collection + this.bookCollection[i].getTitle() + " by " + this.bookCollection[i].getAuthor()
-					+ ", " + this.bookCollection[i].getPagesRead() + " pages read out of  " + this.bookCollection[i].getPagesRead()
-					+ " pages.\n";
+					+ ", " + this.bookCollection[i].getPagesRead() + " pages read out of " + this.bookCollection[i].getPagesRead()
+					+ ".\n";
 			i++;
 		}
 
