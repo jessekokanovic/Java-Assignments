@@ -20,35 +20,35 @@ public class BookCollection {
 																						// where it is saved.
 		this.collectionLength = getCollectionLength(); // run the getCollectionLength method to get the initial number
 														// of books in the collection
-		this.bookCollection = loadBooks(); //load the information from the csv file into book objects stored in this list.
+		this.bookCollection = loadBooks(); // load the information from the csv file into book objects stored in this
+											// list.
 
 		String menu = "[1] Display Collection\n[2] Add Book\n[3] Update Pages Read\n[4] Save Collection and Close";
-		
+
 		String userChoiceString = JOptionPane.showInputDialog(menu);
-		while(userChoiceString != null) {
+		while (userChoiceString != null) {
 			int userChoice = Integer.parseInt(userChoiceString);
-			if(userChoice == 1) {
-				//List the information of the books in the collection by running the displayCollection method.
-				JOptionPane.showMessageDialog(null, "Number of Books: " + this.collectionLength + "\n" + displayCollection());
-				
-			}
-			else if(userChoice == 2) {
-				
-			}
-			else if(userChoice == 3) {
-				
-			}
-			else if(userChoice == 4) {
-				
-			}
-			else {
-				//If none of the correct menu options are selected display an error message.
+			if (userChoice == 1) {
+				// List the information of the books in the collection by running the
+				// displayCollection method.
+				JOptionPane.showMessageDialog(null,
+						"Number of Books: " + this.collectionLength + "\n" + displayCollection());
+
+			} else if (userChoice == 2) {
+				//add a new book to the collection
+				addBook();
+			} else if (userChoice == 3) {
+
+			} else if (userChoice == 4) {
+
+			} else {
+				// If none of the correct menu options are selected display an error message.
 				JOptionPane.showMessageDialog(null, "Please enter a valid option");
 			}
-			
+
 			userChoiceString = JOptionPane.showInputDialog(menu);
 		}
-		
+
 	}
 
 	public int getCollectionLength() {
@@ -112,6 +112,31 @@ public class BookCollection {
 			i++;
 		}
 		return collection;
+	}
+
+	public void addBook() {
+		// Ask the user for the title, author, pages, and default the pages read to
+		// zero. Extend the bookCollection list by 1.
+
+		// Extend the collection list by 1 by creating a temporary list that is one
+		// larger, filling it with information and then storing it in our main list
+		// variable.
+		Book[] extendedCollection = new Book[this.collectionLength + 1];
+		int i = 0;
+		while(i < this.collectionLength) {
+			extendedCollection[i] = this.bookCollection[i];
+			i++;
+		}
+		this.bookCollection = extendedCollection;
+		this.collectionLength = extendedCollection.length;
+		
+		//now that we have extended the list, we can add an extra book object to it by getting the info from the user.
+		String title = JOptionPane.showInputDialog("Enter the title");
+		String author = JOptionPane.showInputDialog("Enter the Author:");
+		int numPages = Integer.parseInt(JOptionPane.showInputDialog("Enter the number of pages:"));
+		Book newBook = new Book(title, author, numPages, 0);
+		this.bookCollection[this.collectionLength - 1] = newBook;
+		
 	}
 
 }
