@@ -50,7 +50,7 @@ public class BookCollection {
 			} else if (userChoice == 4) {
 				saveCollection();
 				JOptionPane.showMessageDialog(null, this.collectionLength + " books saved.");
-				System.exit(0);
+				System.exit(0); //terminate the program
 			} else {
 				// If none of the correct menu options are selected display an error message.
 				JOptionPane.showMessageDialog(null, "Please enter a valid option");
