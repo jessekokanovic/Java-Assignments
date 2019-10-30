@@ -4,8 +4,8 @@ import java.io.*;
 public class BookCollection {
 
 	private Book[] bookCollection; // initialize the array to hold the book objects.
-	private int collectionLength;
-	private String filePath;
+	private int collectionLength;	//number of books in the collection
+	private String filePath; //path where the text file is stored
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
