@@ -14,7 +14,8 @@ public class BookCollection {
 
 	public BookCollection() {
 		// A collection of Book objects stored in an array.
-
+		
+		//THIS MUST MATCH WHERE THE FILE IS STORED OR THE PROGRAM WILL NOT WORK
 		this.filePath = "C:/Users/User/git/Java-Assignments/Assignment3/src/books.txt"; // the file path of the stored
 																						// books, change here to match
 																						// where it is saved.
