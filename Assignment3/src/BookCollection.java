@@ -20,8 +20,9 @@ public class BookCollection {
 																						// where it is saved.
 		this.collectionLength = getCollectionLength(); // run the getCollectionLength method to get the initial number
 														// of books in the collection
-		this.bookCollection = loadBooks(); // load the information from the csv file into book objects stored in this
-											// list.
+		this.bookCollection = loadCollection(); // load the information from the csv file into book objects stored in
+												// this
+		// list.
 
 		String menu = "[1] Display Collection\n[2] Add Book\n[3] Update Pages Read\n[4] Save Collection and Close";
 
@@ -47,7 +48,9 @@ public class BookCollection {
 				updatePagesRead(bookNum);
 
 			} else if (userChoice == 4) {
-
+				saveCollection();
+				JOptionPane.showMessageDialog(null, this.collectionLength + " books saved.");
+				System.exit(0);
 			} else {
 				// If none of the correct menu options are selected display an error message.
 				JOptionPane.showMessageDialog(null, "Please enter a valid option");
@@ -79,7 +82,7 @@ public class BookCollection {
 		return lineNum;
 	}
 
-	public Book[] loadBooks() {
+	public Book[] loadCollection() {
 		// Read each line in the csv and split the string by the delimiter. Use this
 		// information to create a new book object that is added to a list of book
 		// objects. Return this book object so that it may be used.
@@ -157,4 +160,25 @@ public class BookCollection {
 		this.bookCollection[bookNumber - 1].setPagesRead(newPagesRead);
 	}
 
+	public void saveCollection() {
+		// Save each book object as a single line in the text file using commas to
+		// separate values. We are overwriting everything in the file by iterating over
+		// the collection array and using the Book class get methods to grab the
+		// required information.
+		BufferedWriter outFile = null;
+		try {
+			outFile = new BufferedWriter(new FileWriter(this.filePath));
+			int i = 0;
+			while (i < this.collectionLength) {
+				outFile.write(this.bookCollection[i].getTitle() + "," + this.bookCollection[i].getAuthor() + ","
+						+ this.bookCollection[i].getPages() + "," + this.bookCollection[i].getPagesRead() + "\n");
+				i++;
+			}
+			outFile.close();
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
+
+	}
 }
