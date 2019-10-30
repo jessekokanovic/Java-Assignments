@@ -27,6 +27,8 @@ public class BookCollection {
 
 		String userChoiceString = JOptionPane.showInputDialog(menu);
 		while (userChoiceString != null) {
+			// If the user enters a character that can't be parsed into an int the program
+			// will crash.
 			int userChoice = Integer.parseInt(userChoiceString);
 			if (userChoice == 1) {
 				// List the information of the books in the collection by running the
@@ -35,9 +37,14 @@ public class BookCollection {
 						"Number of Books: " + this.collectionLength + "\n" + displayCollection());
 
 			} else if (userChoice == 2) {
-				//add a new book to the collection
+				// add a new book to the collection
 				addBook();
 			} else if (userChoice == 3) {
+				// display the books in the collection and ask the user which one they want to
+				// update
+				int bookNum = Integer.parseInt(JOptionPane
+						.showInputDialog("What number book would you like to update:\n" + displayCollection()));
+				updatePagesRead(bookNum);
 
 			} else if (userChoice == 4) {
 
@@ -123,20 +130,31 @@ public class BookCollection {
 		// variable.
 		Book[] extendedCollection = new Book[this.collectionLength + 1];
 		int i = 0;
-		while(i < this.collectionLength) {
+		while (i < this.collectionLength) {
 			extendedCollection[i] = this.bookCollection[i];
 			i++;
 		}
 		this.bookCollection = extendedCollection;
 		this.collectionLength = extendedCollection.length;
-		
-		//now that we have extended the list, we can add an extra book object to it by getting the info from the user.
+
+		// now that we have extended the list, we can add an extra book object to it by
+		// getting the info from the user.
+		// add the new book object to the end of the collection array.
 		String title = JOptionPane.showInputDialog("Enter the title");
 		String author = JOptionPane.showInputDialog("Enter the Author:");
 		int numPages = Integer.parseInt(JOptionPane.showInputDialog("Enter the number of pages:"));
 		Book newBook = new Book(title, author, numPages, 0);
 		this.bookCollection[this.collectionLength - 1] = newBook;
-		
+		JOptionPane.showMessageDialog(null, newBook.getTitle() + " by " + newBook.getAuthor() + " has been added.");
+
+	}
+
+	public void updatePagesRead(int bookNumber) {
+		// Ask the user what the new number of pages read should be and use the Book
+		// class setPages method to update.
+		int newPagesRead = Integer.parseInt(JOptionPane.showInputDialog(
+				"How many pages have you read for " + this.bookCollection[bookNumber - 1].getTitle() + "?"));
+		this.bookCollection[bookNumber - 1].setPagesRead(newPagesRead);
 	}
 
 }
