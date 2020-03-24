@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 import javax.swing.JOptionPane;
 
 public class MusicLibrary {
@@ -5,6 +8,7 @@ public class MusicLibrary {
 	private int maxSongs;
 	private Song[] songs; // this initializes an array of Song objects.
 	private int currentNumSongs;
+	private String filePath;
 
 	public MusicLibrary(int maxSongs) {
 		// Create the library class initializing arrays using the max number of songs
@@ -12,7 +16,11 @@ public class MusicLibrary {
 		this.maxSongs = maxSongs;
 		this.songs = new Song[maxSongs];
 		this.currentNumSongs = 0;
-
+		this.filePath = "C:/Users/User/git/Java-Assignments/Week10-Tutorial/src/songs.txt"; // store path for text file to
+																						// read and write to
+		//Load the songs from the text file
+		loadSongs();
+		
 		// string to hold and display menu options.
 		String menu = "MusicLibrary v1.0\n";
 		menu += "[1] Add song\n";
@@ -33,22 +41,18 @@ public class MusicLibrary {
 					// if there is no room in the array, run the method to extend it.
 					extendMaxSongs();
 				}
-
 				addSong();
 			} else if (menuChoiceInt == 2) {
 				// display the songs.
 				displaySongs();
-				
 			} else if (menuChoiceInt == 3) {
 				// play the song
 				playSong();
 			} else {
 				JOptionPane.showMessageDialog(null, "That wasn't a valid choice!");
 			}
-
 			menuChoiceString = JOptionPane.showInputDialog(menu);
 		}
-
 	}
 
 	public void extendMaxSongs() {
@@ -105,9 +109,9 @@ public class MusicLibrary {
 		}
 		JOptionPane.showMessageDialog(null, message);
 	}
-	
+
 	public void playSong() {
-		//find a song and play it.
+		// find a song and play it.
 		String targetTitle = JOptionPane.showInputDialog("Enter a song title to search");
 		int i = 0;
 		i = getIndex(targetTitle, i);
@@ -132,7 +136,6 @@ public class MusicLibrary {
 			JOptionPane.showMessageDialog(null, "Could not find any matches for " + targetTitle);
 
 	}
-	
 
 	public int getIndex(String title, int i) {
 		// if the song already exists, find the index of it and return it
@@ -140,6 +143,29 @@ public class MusicLibrary {
 			i = +1;
 		}
 		return i;
+	}
+
+	public void loadSongs() {
+		//read each line in from the text file, and use the information to create new song objects to store in the songs array.
+		int lineNum = 0;
+		BufferedReader inFile = null;
+		try {
+			inFile = new BufferedReader(new FileReader(this.filePath));
+			String currentLine = inFile.readLine();
+			while (currentLine != null) {
+				String[] songInfo = currentLine.split(","); // use the comma as the delimiter in the csv file to get
+															// each individual bit of info for the book
+				Song newSong = new Song(songInfo[0], songInfo[1]);
+				this.songs[lineNum] = newSong;
+				lineNum++;
+				this.currentNumSongs++;
+				currentLine = inFile.readLine();
+			}
+			inFile.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 	}
 
 	public static void main(String[] args) {
