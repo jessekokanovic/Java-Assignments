@@ -19,9 +19,24 @@ public class JourneyBookingSystem {
 		int numAdults;
 		int numChildren;
 		int youngChildren;
+		int totalPrice;
 		
 		Scanner console = new Scanner(System.in);
-
+		System.out.println("Welcome to the Castlemaine-Moolort booking service!");
+		System.out.println("Please select your carriage:\n[F]irst: " + firstSeats + " seats available"
+				+ "\n[S]tandard: " + standardSeats + " seats available"
+						+ "\n[E]xcursion: " + excursionSeats + " seats available\n");
+		String userChoice = console.nextLine().toLowerCase();
+		
+		//determine pricing based on user choice
+		if(userChoice == "f") {
+			System.out.println("How many adults?");
+			numAdults = Integer.parseInt(console.nextLine());
+			totalPrice = numAdults * FIRST_ADULT;
+			
+		}
+		
+		
 
 	}
 
