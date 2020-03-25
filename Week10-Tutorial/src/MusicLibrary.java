@@ -1,5 +1,7 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 
 import javax.swing.JOptionPane;
 
@@ -42,6 +44,7 @@ public class MusicLibrary {
 					extendMaxSongs();
 				}
 				addSong();
+				saveSongs(); //write the new list to the text file.
 			} else if (menuChoiceInt == 2) {
 				// display the songs.
 				displaySongs();
@@ -104,7 +107,7 @@ public class MusicLibrary {
 		String message = "Song List:\n\n";
 		int i = 0;
 		while (i < this.currentNumSongs) {
-			message += this.songs[i].getTitle() + "," + this.songs[i].getLocation() + "\n";
+			message += this.songs[i].getTitle() + ", " + this.songs[i].getLocation() + "\n";
 			i += 1;
 		}
 		JOptionPane.showMessageDialog(null, message);
@@ -158,7 +161,7 @@ public class MusicLibrary {
 				Song newSong = new Song(songInfo[0], songInfo[1]);
 				this.songs[lineNum] = newSong;
 				lineNum++;
-				this.currentNumSongs++;
+				this.currentNumSongs++; //increase the current number of songs by 1 if a new song is added.
 				currentLine = inFile.readLine();
 			}
 			inFile.close();
@@ -166,6 +169,24 @@ public class MusicLibrary {
 			System.out.println(e.getMessage());
 		}
 
+	}
+	
+	public void saveSongs() {
+		//Loop over the songs array, writing each song object as a new line in the file. Use commas as delimiters.
+		BufferedWriter outFile = null;
+		try {
+			outFile = new BufferedWriter(new FileWriter(this.filePath));
+			int i = 0;
+			while (i < this.currentNumSongs) {
+				outFile.write(this.songs[i].getTitle() + "," + this.songs[i].getLocation() + "\n");
+				i++;
+			}
+			outFile.close();
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
+		
 	}
 
 	public static void main(String[] args) {
