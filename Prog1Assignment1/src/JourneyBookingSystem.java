@@ -23,19 +23,37 @@ public class JourneyBookingSystem {
 		
 		Scanner console = new Scanner(System.in);
 		System.out.println("Welcome to the Castlemaine-Moolort booking service!");
-		System.out.println("Please select your carriage:\n[F]irst: " + firstSeats + " seats available"
-				+ "\n[S]tandard: " + standardSeats + " seats available"
-						+ "\n[E]xcursion: " + excursionSeats + " seats available\n");
-		String userChoice = console.nextLine().toLowerCase();
+		System.out.println("Please select your carriage:\n[1] First: " + firstSeats + " seats available"
+				+ "\n[2] Standard: " + standardSeats + " seats available"
+						+ "\n[3] Excursion: " + excursionSeats + " seats available");
+		int userChoice = Integer.parseInt(console.nextLine());
 		
-		//determine pricing based on user choice
-		if(userChoice == "f") {
+		//determine pricing 
+		if(userChoice == 1) {
 			System.out.println("How many adults?");
 			numAdults = Integer.parseInt(console.nextLine());
-			totalPrice = numAdults * FIRST_ADULT;
+			totalPrice = numAdults * FIRST_ADULT;	
+		}
+		else if(userChoice == 2) {
+			System.out.println("How many adults?");
+			numAdults = Integer.parseInt(console.nextLine());
+			System.out.println("How many children? (Under 14)");
+			numChildren = Integer.parseInt(console.nextLine());
+			System.out.println("How many of these children are under 3 years old?");
+			youngChildren = Integer.parseInt(console.nextLine());
+			totalPrice = ((numChildren - youngChildren) * STANDARD_CHILD) + (numAdults * STANDARD_ADULT);
 			
 		}
-		
+		else if(userChoice == 3) {
+			System.out.println("How many adults?");
+			numAdults = Integer.parseInt(console.nextLine());
+			System.out.println("How many children? (Under 14)");
+			numChildren = Integer.parseInt(console.nextLine());
+			System.out.println("How many of these children are under 3 years old?");
+			youngChildren = Integer.parseInt(console.nextLine());
+			totalPrice = ((numChildren - youngChildren) * EXCURSION_CHILD) + (numAdults * EXCURSION_ADULT);
+			
+		}
 		
 
 	}
