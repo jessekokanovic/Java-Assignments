@@ -33,8 +33,8 @@ public class JourneyBookingSystem {
 				//Check Available Seats
 				
 				System.out.println("First: " + firstSeats + " seats available"
-				+ "\n[2] Standard: " + standardSeats + " seats available"
-						+ "\n[3] Excursion: " + excursionSeats + " seats available");
+				+ "\nStandard: " + standardSeats + " seats available"
+						+ "\nExcursion: " + excursionSeats + " seats available\n");
 				System.out.println(MENU);
 				menuChoice = Integer.parseInt(console.nextLine());
 			}
@@ -46,9 +46,11 @@ public class JourneyBookingSystem {
 		
 				//Determine pricing based on carriage type and passenger type/number 
 				if(userChoice == 1) {
-					System.out.println("How many adults?");
+					System.out.println("How many adults? ($80)");
 					numAdults = Integer.parseInt(console.nextLine());
 					totalPrice = numAdults * FIRST_ADULT;	
+					//Read out total price
+					System.out.println(totalPrice);
 				}
 				else if(userChoice == 2) {
 					System.out.println("How many adults?");
