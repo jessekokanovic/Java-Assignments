@@ -3,15 +3,8 @@ import java.util.Scanner;
 public class JourneyBookingSystem {
 	
 	public static void main(String[] args) {
-		//Books seats on the train carriages and produces a receipt.
-		
-		//Define pricing as constant integers 
-		int FIRST_ADULT = 80;
-		int STANDARD_ADULT = 55;
-		int STANDARD_CHILD = 30;
-		int EXCURSION_ADULT = 40;
-		int EXCURSION_CHILD = 20;
-		
+		//Books seats on the train carriages
+	
 		//Menu String Constant
 		String MENU = "[1] Display Available Seats\n[2] Book Seats\n[3] Quit";
 		
@@ -22,7 +15,6 @@ public class JourneyBookingSystem {
 		int numAdults;
 		int numChildren;
 		int youngChildren;
-		int totalPrice;
 		
 		Scanner console = new Scanner(System.in);
 		System.out.println("Welcome to the Castlemaine-Moolort booking service!");
@@ -48,9 +40,10 @@ public class JourneyBookingSystem {
 				if(userChoice == 1) {
 					System.out.println("How many adults? ($80)");
 					numAdults = Integer.parseInt(console.nextLine());
-					totalPrice = numAdults * FIRST_ADULT;	
-					//Read out total price
-					System.out.println(totalPrice);
+					printReceipt(1, numAdults, 0, 0);
+					
+					//subtract seats from available. 
+
 				}
 				else if(userChoice == 2) {
 					System.out.println("How many adults?");
@@ -59,7 +52,9 @@ public class JourneyBookingSystem {
 					numChildren = Integer.parseInt(console.nextLine());
 					System.out.println("How many of these children are under 3 years old?");
 					youngChildren = Integer.parseInt(console.nextLine());
-					totalPrice = ((numChildren - youngChildren) * STANDARD_CHILD) + (numAdults * STANDARD_ADULT);
+					
+					//subtract seats from available. 
+
 					
 				}
 				else if(userChoice == 3) {
@@ -69,17 +64,50 @@ public class JourneyBookingSystem {
 					numChildren = Integer.parseInt(console.nextLine());
 					System.out.println("How many of these children are under 3 years old?");
 					youngChildren = Integer.parseInt(console.nextLine());
-					totalPrice = ((numChildren - youngChildren) * EXCURSION_CHILD) + (numAdults * EXCURSION_ADULT);
+					
+					//subtract seats from available. 
 					
 				}
 				
-				//generate and print the reciept
+				//generate and print the receipt
+				
 				
 				//get the menu choice again
 				
 			}
 		}
 		System.exit(0);
+	}
+
+	
+	public static void printReceipt(int trainClass, int numAdults, int numChildren, int youngChildren)  {
+		//Calculate costs and show on receipt
+		
+		//Define pricing as constant integers 
+		int FIRST_ADULT = 80;
+		int STANDARD_ADULT = 55;
+		int STANDARD_CHILD = 30;
+		int EXCURSION_ADULT = 40;
+		int EXCURSION_CHILD = 20;
+		int adultCost;
+		int childCost = 0;
+		
+		if (trainClass == 1) {
+			adultCost = numAdults * FIRST_ADULT;
+		}
+		else if(trainClass == 2) {
+			adultCost = numAdults * STANDARD_ADULT;
+			childCost = (numChildren - youngChildren) * STANDARD_CHILD;
+			
+		}
+		else if(trainClass == 3) {
+			adultCost = numAdults * EXCURSION_ADULT;
+			childCost = (numChildren - youngChildren) * EXCURSION_CHILD;
+			
+		}
+		
+		
+		
 	}
 
 }
