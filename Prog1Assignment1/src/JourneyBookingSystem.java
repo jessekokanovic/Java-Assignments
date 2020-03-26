@@ -12,6 +12,9 @@ public class JourneyBookingSystem {
 		int EXCURSION_ADULT = 40;
 		int EXCURSION_CHILD = 20;
 		
+		//Menu String Constant
+		String MENU = "[1] Display Available Seats\n[2] Book Seats\n[3] Quit";
+		
 		//Create initial values for available seats and number of passengers
 		int firstSeats = 48;
 		int standardSeats = 70;
@@ -23,39 +26,58 @@ public class JourneyBookingSystem {
 		
 		Scanner console = new Scanner(System.in);
 		System.out.println("Welcome to the Castlemaine-Moolort booking service!");
-		System.out.println("Please select your carriage:\n[1] First: " + firstSeats + " seats available"
+		System.out.println(MENU);
+		int menuChoice = Integer.parseInt(console.nextLine());
+		while (menuChoice != 3) {
+			if (menuChoice == 1) {
+				//Check Available Seats
+				
+				System.out.println("First: " + firstSeats + " seats available"
 				+ "\n[2] Standard: " + standardSeats + " seats available"
 						+ "\n[3] Excursion: " + excursionSeats + " seats available");
-		int userChoice = Integer.parseInt(console.nextLine());
+				System.out.println(MENU);
+				menuChoice = Integer.parseInt(console.nextLine());
+			}
+			else if (menuChoice == 2) {
+				// Make a booking
+				
+				System.out.println("Please select your carriage:\n[1] First\n[2] Standard\n[3] Excursion");
+				int userChoice = Integer.parseInt(console.nextLine());
 		
-		//determine pricing 
-		if(userChoice == 1) {
-			System.out.println("How many adults?");
-			numAdults = Integer.parseInt(console.nextLine());
-			totalPrice = numAdults * FIRST_ADULT;	
+				//Determine pricing based on carriage type and passenger type/number 
+				if(userChoice == 1) {
+					System.out.println("How many adults?");
+					numAdults = Integer.parseInt(console.nextLine());
+					totalPrice = numAdults * FIRST_ADULT;	
+				}
+				else if(userChoice == 2) {
+					System.out.println("How many adults?");
+					numAdults = Integer.parseInt(console.nextLine());
+					System.out.println("How many children? (Under 14)");
+					numChildren = Integer.parseInt(console.nextLine());
+					System.out.println("How many of these children are under 3 years old?");
+					youngChildren = Integer.parseInt(console.nextLine());
+					totalPrice = ((numChildren - youngChildren) * STANDARD_CHILD) + (numAdults * STANDARD_ADULT);
+					
+				}
+				else if(userChoice == 3) {
+					System.out.println("How many adults?");
+					numAdults = Integer.parseInt(console.nextLine());
+					System.out.println("How many children? (Under 14)");
+					numChildren = Integer.parseInt(console.nextLine());
+					System.out.println("How many of these children are under 3 years old?");
+					youngChildren = Integer.parseInt(console.nextLine());
+					totalPrice = ((numChildren - youngChildren) * EXCURSION_CHILD) + (numAdults * EXCURSION_ADULT);
+					
+				}
+				
+				//generate and print the reciept
+				
+				//get the menu choice again
+				
+			}
 		}
-		else if(userChoice == 2) {
-			System.out.println("How many adults?");
-			numAdults = Integer.parseInt(console.nextLine());
-			System.out.println("How many children? (Under 14)");
-			numChildren = Integer.parseInt(console.nextLine());
-			System.out.println("How many of these children are under 3 years old?");
-			youngChildren = Integer.parseInt(console.nextLine());
-			totalPrice = ((numChildren - youngChildren) * STANDARD_CHILD) + (numAdults * STANDARD_ADULT);
-			
-		}
-		else if(userChoice == 3) {
-			System.out.println("How many adults?");
-			numAdults = Integer.parseInt(console.nextLine());
-			System.out.println("How many children? (Under 14)");
-			numChildren = Integer.parseInt(console.nextLine());
-			System.out.println("How many of these children are under 3 years old?");
-			youngChildren = Integer.parseInt(console.nextLine());
-			totalPrice = ((numChildren - youngChildren) * EXCURSION_CHILD) + (numAdults * EXCURSION_ADULT);
-			
-		}
-		
-
+		System.exit(0);
 	}
 
 }
