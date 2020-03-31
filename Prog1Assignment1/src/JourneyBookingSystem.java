@@ -37,57 +37,59 @@ public class JourneyBookingSystem {
 		
 				//Determine pricing based on carriage type and passenger type/number 
 				if(userChoice == 1) {
-					System.out.println("How many people are booking?");
-					int numPeople = Integer.parseInt(console.nextLine());
+					System.out.println("How many adults?");
+					numAdults = Integer.parseInt(console.nextLine());
 					
-					if(numPeople > firstSeats) {
+					if(numAdults > firstSeats) {
 					//determine if the booking can be accepted or not
-						System.out.println("Not enough seats to book!");
+						System.out.println("No seats available!");
 					}
 					else {
 						//Calculate cost, print receipt, adjust available seats
-						System.out.println("How many adults?");
-						numAdults = Integer.parseInt(console.nextLine());
+						
 						printReceipt(1, numAdults, 0, 0);
+						firstSeats = firstSeats - numAdults;
 					}	
 
 				}
 				else if(userChoice == 2) {
-					System.out.println("How many people are booking?");
-					int numPeople = Integer.parseInt(console.nextLine());
+					System.out.println("How many adults?");
+					numAdults = Integer.parseInt(console.nextLine());
+					System.out.println("How many Children (<18)?");
+					numChildren = Integer.parseInt(console.nextLine());
+					System.out.println("How many of these children are under 3 years old?");
+					youngChildren = Integer.parseInt(console.nextLine());
 					
-					if(numPeople > firstSeats) {
+					if((numAdults + numChildren) > standardSeats) {
 					//determine if the booking can be accepted or not
-						System.out.println("Not enough seats to book!");
+						System.out.println("No seats available!");
 					}
 					else {
 						//Calculate cost, print receipt, adjust available seats
-						System.out.println("How many adults?");
-						numAdults = Integer.parseInt(console.nextLine());
-						System.out.println("How many Children (<18)?");
-						numChildren = Integer.parseInt(console.nextLine());
-						System.out.println("How many of these children are under 3 years old?");
-						youngChildren = Integer.parseInt(console.nextLine());
+					
 						printReceipt(2, numAdults, numChildren, youngChildren);
+						standardSeats = standardSeats - (numAdults + numChildren);
 					}	
 				}
 				else if(userChoice == 3) {
-					System.out.println("How many people are booking?");
-					int numPeople = Integer.parseInt(console.nextLine());
+					System.out.println("How many adults?");
+					numAdults = Integer.parseInt(console.nextLine());
+					System.out.println("How many Children (<18)?");
+					numChildren = Integer.parseInt(console.nextLine());
+					System.out.println("How many of these children are under 3 years old?");
+					youngChildren = Integer.parseInt(console.nextLine());
 					
-					if(numPeople > firstSeats) {
+					if((numAdults + numChildren) > excursionSeats) {
 					//determine if the booking can be accepted or not
-						System.out.println("Not enough seats to book!");
+						System.out.println("No seats available!");
 					}
 					else {
 						//Calculate cost, print receipt, adjust available seats
-						System.out.println("How many adults?");
-						numAdults = Integer.parseInt(console.nextLine());
-						System.out.println("How many Children (<18)?");
-						numChildren = Integer.parseInt(console.nextLine());
-						System.out.println("How many of these children are under 3 years old?");
-						youngChildren = Integer.parseInt(console.nextLine());
+						
 						printReceipt(3, numAdults, numChildren, youngChildren);
+						excursionSeats = excursionSeats - (numAdults + numChildren);
+
+						
 					}	
 				}
 				
