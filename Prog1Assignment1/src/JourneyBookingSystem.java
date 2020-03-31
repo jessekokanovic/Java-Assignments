@@ -114,6 +114,7 @@ public class JourneyBookingSystem {
 		int EXCURSION_CHILD = 20;
 		int adultCost =0;
 		int childCost = 0;
+		int childDiscount = 0;
 		String carriage = "";
 		
 		if (trainClass == 1) {
@@ -122,12 +123,14 @@ public class JourneyBookingSystem {
 		}
 		else if(trainClass == 2) {
 			adultCost = numAdults * STANDARD_ADULT;
-			childCost = (numChildren - youngChildren) * STANDARD_CHILD;
+			childCost = numChildren * STANDARD_CHILD;
+			childDiscount = youngChildren * STANDARD_CHILD;
 			carriage = "Standard Class";
 		}
 		else if(trainClass == 3) {
 			adultCost = numAdults * EXCURSION_ADULT;
-			childCost = (numChildren - youngChildren) * EXCURSION_CHILD;
+			childCost = numChildren * EXCURSION_CHILD;
+			childDiscount = youngChildren * EXCURSION_CHILD;
 			carriage = "Excursion Class";
 		}
 		
@@ -135,8 +138,8 @@ public class JourneyBookingSystem {
 		System.out.println("------------------------------");
 		System.out.printf("%-10s x%-10d $%-8d\n","Adults", numAdults, adultCost);
 		System.out.printf("%-10s x%-10d $%-8d\n","Children", numChildren, childCost);
-		System.out.printf("%-10s x%-10d -$%-8d\n", "Free Child", youngChildren, childCost);
-		System.out.printf("%-10s x%-10s $%-8d\n", "TOTAL\n", "", adultCost + childCost);
+		System.out.printf("%-10s x%-10d-$%-8d\n", "Free Child", youngChildren, childDiscount);
+		System.out.printf("%-10s  %-10s $%-8d\n", "TOTAL", "", adultCost + childCost - childDiscount);
 		
 	}
 
