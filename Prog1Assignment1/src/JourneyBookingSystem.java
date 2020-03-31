@@ -9,12 +9,14 @@ public class JourneyBookingSystem {
 		String MENU = "\n[1] Display Available Seats\n[2] Book Seats\n[3] Quit";
 		
 		//Create initial values for available seats and number of passengers
-		int firstSeats = 48;
-		int standardSeats = 70;
-		int excursionSeats = 95;
+		int[] firstSeats = {48, 48, 48, 48, 48};
+		int[] standardSeats = {70, 70, 70, 70,  70};
+		int[] excursionSeats = {95, 95, 95, 95, 95};
 		int numAdults;
 		int numChildren;
 		int youngChildren;
+		
+		String[] STATIONS = {"Castlemaine", "Campbell", "Guildford", "Strangway", "Newstead", "Moolort"};
 		
 		Scanner console = new Scanner(System.in);
 		System.out.println("Welcome to the Castlemaine-Moolort booking service!");
