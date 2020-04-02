@@ -9,33 +9,27 @@ public class JourneyBookingSystem {
 		String MENU = "\n[1] Display Available Seats\n[2] Book Seats\n[3] Quit";
 		
 		//Create initial values for available seats and number of passengers
-		int[] firstSeats = {48, 48, 48, 48, 48};
-		int[] standardSeats = {70, 70, 70, 70,  70};
-		int[] excursionSeats = {95, 95, 95, 95, 95};
+		int[] firstSeats = {48, 48, 48, 48, 48, 48};
+		int[] standardSeats = {70, 70, 70, 70,  70, 70};
+		int[] excursionSeats = {95, 95, 95, 95, 95, 95};
 		int numAdults;
 		int numChildren;
 		int youngChildren;
-		
 		String[] STATIONS = {"Castlemaine", "Campbell", "Guildford", "Strangway", "Newstead", "Moolort"};
-		
 		Scanner console = new Scanner(System.in);
+		
 		System.out.println("Welcome to the Castlemaine-Moolort booking service!");
 		System.out.println(MENU);
 		int menuChoice = Integer.parseInt(console.nextLine());
 		while (menuChoice != 3) {
 			if (menuChoice == 1) {
 				//Check Available Seats
-				
-				/*
-				 * System.out.println("First: " + firstSeats + " seats available" +
-				 * "\nStandard: " + standardSeats + " seats available" + "\nExcursion: " +
-				 * excursionSeats + " seats available\n"); System.out.println(MENU);
-				 */
-				System.out.printf("%-10s: %-10s %-10s %-10s\n", "Station", "First", "Standard", "Excursion");
+				System.out.printf("%-14s %-14s %-14s %-14s\n", "Station", "First", "Standard", "Excursion");
+				System.out.println("-----------------------------------------------------------------");
 				for(int i = 0; i < STATIONS.length; i++) {
-					System.out.printf("%-10s: %-10d %-10d %-10d\n", STATIONS[i], firstSeats[i], standardSeats[i], excursionSeats[i]);
+					System.out.printf("%-14s %-14d %-14d %-14d\n", STATIONS[i], firstSeats[i], standardSeats[i], excursionSeats[i]);
 				}
-				
+				System.out.println(MENU);
 				menuChoice = Integer.parseInt(console.nextLine());
 			}
 			else if (menuChoice == 2) {
@@ -64,11 +58,12 @@ public class JourneyBookingSystem {
 					}
 					else {
 						//Calculate cost, print receipt, adjust available seats
-						
 						printReceipt(1, numAdults, 0, 0);
-						firstSeats[startPoint] = firstSeats[startPoint] - numAdults;
+						//Adjust available seats for every station between the starting point and the end point. 
+						for (int i = startPoint; i <= endPoint; i++) {
+							firstSeats[i] = firstSeats[i] - numAdults;
+						}
 					}	
-
 				}
 				else if(userChoice == 2) {
 					System.out.println("How many adults?");
@@ -84,9 +79,11 @@ public class JourneyBookingSystem {
 					}
 					else {
 						//Calculate cost, print receipt, adjust available seats
-					
 						printReceipt(2, numAdults, numChildren, youngChildren);
-						standardSeats[startPoint] = standardSeats[startPoint] - (numAdults + numChildren);
+						//Adjust available seats for every station between the starting point and the end point. 
+						for (int i = startPoint; i <= endPoint; i++) {
+							standardSeats[i] = standardSeats[i] - (numAdults + numChildren);
+						}
 					}	
 				}
 				else if(userChoice == 3) {
@@ -103,24 +100,21 @@ public class JourneyBookingSystem {
 					}
 					else {
 						//Calculate cost, print receipt, adjust available seats
-						
 						printReceipt(3, numAdults, numChildren, youngChildren);
-						excursionSeats[startPoint] = excursionSeats[startPoint] - (numAdults + numChildren);
-
-						
+						//Adjust available seats for every station between the starting point and the end point. 
+						for (int i = startPoint; i <= endPoint; i++) {
+							excursionSeats[i] = excursionSeats[i] - (numAdults + numChildren);
+						}
 					}	
 				}
-				
 				//get the menu choice again
 				System.out.println(MENU);
 				menuChoice = Integer.parseInt(console.nextLine());
-				
 			}
 		}
 		System.exit(0);
 	}
 
-	
 	public static void printReceipt(int trainClass, int numAdults, int numChildren, int youngChildren)  {
 		//Calculate costs and show on receipt
 		
