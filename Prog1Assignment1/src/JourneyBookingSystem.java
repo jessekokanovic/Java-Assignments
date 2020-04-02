@@ -26,23 +26,39 @@ public class JourneyBookingSystem {
 			if (menuChoice == 1) {
 				//Check Available Seats
 				
-				System.out.println("First: " + firstSeats + " seats available"
-				+ "\nStandard: " + standardSeats + " seats available"
-						+ "\nExcursion: " + excursionSeats + " seats available\n");
-				System.out.println(MENU);
+				/*
+				 * System.out.println("First: " + firstSeats + " seats available" +
+				 * "\nStandard: " + standardSeats + " seats available" + "\nExcursion: " +
+				 * excursionSeats + " seats available\n"); System.out.println(MENU);
+				 */
+				System.out.printf("%-10s: %-10s %-10s %-10s\n", "Station", "First", "Standard", "Excursion");
+				for(int i = 0; i < STATIONS.length; i++) {
+					System.out.printf("%-10s: %-10d %-10d %-10d\n", STATIONS[i], firstSeats[i], standardSeats[i], excursionSeats[i]);
+				}
+				
 				menuChoice = Integer.parseInt(console.nextLine());
 			}
 			else if (menuChoice == 2) {
 				// Make a booking
 				System.out.println("\nPlease select your carriage:\n[1] First\n[2] Standard\n[3] Excursion");
 				int userChoice = Integer.parseInt(console.nextLine());
-		
+				System.out.println("\nPlease select your starting point:");
+				for(int i = 0; i < STATIONS.length;i++) {
+					System.out.printf("[%d] %s\n", i, STATIONS[i]);
+				}
+				int startPoint = Integer.parseInt(console.nextLine());
+				System.out.println("\nPlease select your end point:");
+				for(int i = 0; i < STATIONS.length;i++) {
+					System.out.printf("[%d] %s\n", i, STATIONS[i]);
+				}
+				int endPoint = Integer.parseInt(console.nextLine());
+
 				//Determine pricing based on carriage type and passenger type/number 
 				if(userChoice == 1) {
 					System.out.println("How many adults?");
 					numAdults = Integer.parseInt(console.nextLine());
 					
-					if(numAdults > firstSeats) {
+					if(numAdults > firstSeats[startPoint]) {
 					//determine if the booking can be accepted or not
 						System.out.println("No seats available!");
 					}
@@ -50,7 +66,7 @@ public class JourneyBookingSystem {
 						//Calculate cost, print receipt, adjust available seats
 						
 						printReceipt(1, numAdults, 0, 0);
-						firstSeats = firstSeats - numAdults;
+						firstSeats[startPoint] = firstSeats[startPoint] - numAdults;
 					}	
 
 				}
@@ -62,7 +78,7 @@ public class JourneyBookingSystem {
 					System.out.println("How many of these children are under 3 years old?");
 					youngChildren = Integer.parseInt(console.nextLine());
 					
-					if((numAdults + numChildren) > standardSeats) {
+					if((numAdults + numChildren) > standardSeats[startPoint]) {
 					//determine if the booking can be accepted or not
 						System.out.println("No seats available!");
 					}
@@ -70,7 +86,7 @@ public class JourneyBookingSystem {
 						//Calculate cost, print receipt, adjust available seats
 					
 						printReceipt(2, numAdults, numChildren, youngChildren);
-						standardSeats = standardSeats - (numAdults + numChildren);
+						standardSeats[startPoint] = standardSeats[startPoint] - (numAdults + numChildren);
 					}	
 				}
 				else if(userChoice == 3) {
@@ -81,7 +97,7 @@ public class JourneyBookingSystem {
 					System.out.println("How many of these children are under 3 years old?");
 					youngChildren = Integer.parseInt(console.nextLine());
 					
-					if((numAdults + numChildren) > excursionSeats) {
+					if((numAdults + numChildren) > excursionSeats[startPoint]) {
 					//determine if the booking can be accepted or not
 						System.out.println("No seats available!");
 					}
@@ -89,7 +105,7 @@ public class JourneyBookingSystem {
 						//Calculate cost, print receipt, adjust available seats
 						
 						printReceipt(3, numAdults, numChildren, youngChildren);
-						excursionSeats = excursionSeats - (numAdults + numChildren);
+						excursionSeats[startPoint] = excursionSeats[startPoint] - (numAdults + numChildren);
 
 						
 					}	
