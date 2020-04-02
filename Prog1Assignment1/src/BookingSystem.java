@@ -35,33 +35,33 @@ public class BookingSystem {
 				// Make a booking
 				System.out.println("\nPlease select your carriage:\n[1] First\n[2] Standard\n[3] Excursion");
 				int userChoice = Integer.parseInt(console.nextLine());
+				trainService.setClass(userChoice);
 				System.out.println("\nPlease select your starting point:");
 				for(int i = 0; i < STATIONS.length;i++) {
 					System.out.printf("[%d] %s\n", i, STATIONS[i]);
 				}
-				int startPoint = Integer.parseInt(console.nextLine());
+				trainService.setStart(Integer.parseInt(console.nextLine()));
 				System.out.println("\nPlease select your end point:");
 				for(int i = 0; i < STATIONS.length;i++) {
 					System.out.printf("[%d] %s\n", i, STATIONS[i]);
 				}
-				int endPoint = Integer.parseInt(console.nextLine());
+				trainService.setEnd(Integer.parseInt(console.nextLine()));
 
 				//Determine pricing based on carriage type and passenger type/number 
 				if(userChoice == 1) {
 					System.out.println("How many adults?");
 					numAdults = Integer.parseInt(console.nextLine());
+					numChildren = 0;
 					
-					if(numAdults > firstSeats[startPoint]) {
+					if(trainService.checkSeats(this.numAdults, this.numChildren) == 0) {
 					//determine if the booking can be accepted or not
 						System.out.println("No seats available!");
 					}
 					else {
 						//Calculate cost, print receipt, adjust available seats
-						printReceipt(STATIONS, 1, numAdults, 0, 0, startPoint, endPoint);
+						
 						//Adjust available seats for every station between the starting point and the end point. 
-						for (int i = startPoint; i <= endPoint; i++) {
-							firstSeats[i] = firstSeats[i] - numAdults;
-						}
+						trainService.adjustSeats(numAdults, numChildren);
 					}	
 				}
 				else if(userChoice == 2) {
