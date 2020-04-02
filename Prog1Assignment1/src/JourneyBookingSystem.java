@@ -58,7 +58,7 @@ public class JourneyBookingSystem {
 					}
 					else {
 						//Calculate cost, print receipt, adjust available seats
-						printReceipt(1, numAdults, 0, 0);
+						printReceipt(STATIONS, 1, numAdults, 0, 0, startPoint, endPoint);
 						//Adjust available seats for every station between the starting point and the end point. 
 						for (int i = startPoint; i <= endPoint; i++) {
 							firstSeats[i] = firstSeats[i] - numAdults;
@@ -79,7 +79,7 @@ public class JourneyBookingSystem {
 					}
 					else {
 						//Calculate cost, print receipt, adjust available seats
-						printReceipt(2, numAdults, numChildren, youngChildren);
+						printReceipt(STATIONS, 2, numAdults, numChildren, youngChildren, startPoint, endPoint);
 						//Adjust available seats for every station between the starting point and the end point. 
 						for (int i = startPoint; i <= endPoint; i++) {
 							standardSeats[i] = standardSeats[i] - (numAdults + numChildren);
@@ -100,7 +100,7 @@ public class JourneyBookingSystem {
 					}
 					else {
 						//Calculate cost, print receipt, adjust available seats
-						printReceipt(3, numAdults, numChildren, youngChildren);
+						printReceipt(STATIONS, 3, numAdults, numChildren, youngChildren, startPoint, endPoint);
 						//Adjust available seats for every station between the starting point and the end point. 
 						for (int i = startPoint; i <= endPoint; i++) {
 							excursionSeats[i] = excursionSeats[i] - (numAdults + numChildren);
@@ -115,7 +115,7 @@ public class JourneyBookingSystem {
 		System.exit(0);
 	}
 
-	public static void printReceipt(int trainClass, int numAdults, int numChildren, int youngChildren)  {
+	public static void printReceipt(String[] STATIONS, int trainClass, int numAdults, int numChildren, int youngChildren, int start, int end)  {
 		//Calculate costs and show on receipt
 		
 		//Define pricing as constant integers 
@@ -127,6 +127,7 @@ public class JourneyBookingSystem {
 		int adultCost =0;
 		int childCost = 0;
 		int childDiscount = 0;
+		double groupDiscount = 0;
 		String carriage = "";
 		
 		if (trainClass == 1) {
@@ -151,8 +152,15 @@ public class JourneyBookingSystem {
 		System.out.printf("%-10s x%-10d $%-8d\n","Adults", numAdults, adultCost);
 		System.out.printf("%-10s x%-10d $%-8d\n","Children", numChildren, childCost);
 		System.out.printf("%-10s x%-10d-$%-8d\n", "Free Child", youngChildren, childDiscount);
-		System.out.printf("%-10s  %-10s $%-8d\n", "TOTAL", "", adultCost + childCost - childDiscount);
-		
+		System.out.printf("%-10s x%-10d $%-8d\n", "Booking Fee", numAdults + (numChildren - youngChildren), (numAdults + (numChildren - youngChildren)) * 5);
+		if((numAdults + numChildren) >=10) {
+			groupDiscount = 0.1 * (adultCost + childCost - childDiscount);
+			System.out.printf("%-10s x%-10s-$%-8d\n", "Group Discount", "", groupDiscount);
+		}
+		else {
+			groupDiscount = 0;
+		}
+		System.out.printf("%-10s  %-10s $%-8d\n", "TOTAL", "", adultCost + childCost - childDiscount - groupDiscount);
 	}
 
 }
