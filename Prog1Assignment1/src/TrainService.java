@@ -38,7 +38,7 @@ public class TrainService {
 	public void setEnd(int end){
 		//sets the end point of the booking
 		
-		this.startPoint = end;
+		this.endPoint = end;
 	}
 	
 	public void setClass(int trainClass){

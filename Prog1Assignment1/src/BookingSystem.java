@@ -88,7 +88,7 @@ public class BookingSystem {
 						//Calculate cost, print receipt, adjust available seats
 						BookingReceipt receipt = new BookingReceipt(11, 6);
 						receipt.calculateCosts(trainService.getDistance(), this.numAdults, this.numChildren, this.youngChildren);
-						receipt.printReceipt("First",STATIONS[startPoint] , STATIONS[endPoint], this.numAdults, this.numChildren, this.youngChildren);
+						receipt.printReceipt("Standard",STATIONS[startPoint] , STATIONS[endPoint], this.numAdults, this.numChildren, this.youngChildren);
 						//Adjust available seats for every station between the starting point and the end point. 
 						trainService.adjustSeats(numAdults, numChildren);
 						}
@@ -111,7 +111,7 @@ public class BookingSystem {
 						//Calculate cost, print receipt, adjust available seats
 						BookingReceipt receipt = new BookingReceipt(11, 6);
 						receipt.calculateCosts(trainService.getDistance(), this.numAdults, this.numChildren, this.youngChildren);
-						receipt.printReceipt("First",STATIONS[startPoint] , STATIONS[endPoint], this.numAdults, this.numChildren, this.youngChildren);
+						receipt.printReceipt("Excursion",STATIONS[startPoint] , STATIONS[endPoint], this.numAdults, this.numChildren, this.youngChildren);
 						//Adjust available seats for every station between the starting point and the end point. 
 						trainService.adjustSeats(numAdults, numChildren);
 						}	

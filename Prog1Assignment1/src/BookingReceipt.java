@@ -14,7 +14,7 @@ public class BookingReceipt {
 	private int childDiscount;
 	private double groupDiscount;
 	private int bookingFee;
-	private int total;
+	private double total;
 	
 	public BookingReceipt(int adultTicket, int childTicket) {
 		
@@ -30,7 +30,7 @@ public class BookingReceipt {
 		this.childCost = children * (this.childTicket * distance);
 		this.childDiscount = youngChildren * (this.childTicket * distance);
 		this.bookingFee = (adults + children) * 5;
-		this.total = this.adultCost + this.childCost + this.bookingFee - this.childDiscount;
+		this.total = (this.adultCost + this.childCost + this.bookingFee) - this.childDiscount - this.groupDiscount;
 		this.groupDiscount = 0.1 * this.total;
 		
 	}
@@ -44,15 +44,15 @@ public class BookingReceipt {
 		System.out.printf("%-20s x%-20d $%-20d\n","Adults", numAdults, this.adultCost);
 		System.out.printf("%-20s x%-20d $%-20d\n","Children", numChildren, this.childCost);
 		System.out.printf("%-20s x%-20d-$%-20d\n", "Free Child", youngChildren, this.childDiscount);
-		System.out.printf("%-20s x%-20d $%-20d\n", "Booking Fee", this.bookingFee);
+		System.out.printf("%-20s x%-20d $%-20d\n", "Booking Fee",numAdults + numChildren, this.bookingFee);
 		if((numAdults + numChildren) >=10) {
-			System.out.printf("%-20s  %-20s-$%-20.2f\n", "Group Discount", "10% Off", this.groupDiscount);
+			System.out.printf("%-20s %-20s-$%-20.2f\n", "Group Discount", "10% Off", this.groupDiscount);
 		}
 		else {
 			this.groupDiscount = 0;
 		}
 		System.out.println("------------------------------------------------------");
-		System.out.printf("%-20s  %-20s $%-20.2f\n", "TOTAL", "", adultCost + childCost - childDiscount - groupDiscount);
+		System.out.printf("%-20s  %-20s $%-20.2f\n", "TOTAL", "", this.total);
 		
 	}
 	
