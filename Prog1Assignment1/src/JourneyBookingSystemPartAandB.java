@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class JourneyBookingSystem {
+public class JourneyBookingSystemPartAandB {
 	
 	public static void main(String[] args) {
 		//Books seats on the train carriages
