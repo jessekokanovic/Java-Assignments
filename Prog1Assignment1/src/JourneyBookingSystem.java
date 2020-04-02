@@ -115,15 +115,15 @@ public class JourneyBookingSystem {
 		System.exit(0);
 	}
 
-	public static void printReceipt(String[] STATIONS, int trainClass, int numAdults, int numChildren, int youngChildren, int start, int end)  {
+	public static void printReceipt(String[] STATIONS, int trainClass, int numAdults, int numChildren, int youngChildren, int startPoint, int endPoint)  {
 		//Calculate costs and show on receipt
 		
-		//Define pricing as constant integers 
-		int FIRST_ADULT = 80;
-		int STANDARD_ADULT = 55;
-		int STANDARD_CHILD = 30;
-		int EXCURSION_ADULT = 40;
-		int EXCURSION_CHILD = 20;
+		//Calculate cost for a traveler to go from the start point to the end point 
+		int firstAdult = 16 * (endPoint - startPoint);
+		int standardAdult = 11 * (endPoint - startPoint);
+		int standardChild = 6 * (endPoint - startPoint);
+		int excursionAdult = 8 * (endPoint - startPoint);
+		int excursionChild = 4 * (endPoint - startPoint);
 		int adultCost =0;
 		int childCost = 0;
 		int childDiscount = 0;
@@ -131,23 +131,24 @@ public class JourneyBookingSystem {
 		String carriage = "";
 		
 		if (trainClass == 1) {
-			adultCost = numAdults * FIRST_ADULT;
+			adultCost = numAdults * firstAdult;
 			carriage = "First Class";
 		}
 		else if(trainClass == 2) {
-			adultCost = numAdults * STANDARD_ADULT;
-			childCost = numChildren * STANDARD_CHILD;
-			childDiscount = youngChildren * STANDARD_CHILD;
+			adultCost = numAdults * standardAdult;
+			childCost = numChildren * standardChild;
+			childDiscount = youngChildren * standardChild;
 			carriage = "Standard Class";
 		}
 		else if(trainClass == 3) {
-			adultCost = numAdults * EXCURSION_ADULT;
-			childCost = numChildren * EXCURSION_CHILD;
-			childDiscount = youngChildren * EXCURSION_CHILD;
+			adultCost = numAdults * excursionAdult;
+			childCost = numChildren * excursionChild;
+			childDiscount = youngChildren * excursionChild;
 			carriage = "Excursion Class";
 		}
 		
 		System.out.printf("%-6s %-6s %-6s\n","", carriage,"");
+		System.out.printf("%-6s %-6s %-6s\n",STATIONS[startPoint], "to",STATIONS[endPoint]);
 		System.out.println("------------------------------");
 		System.out.printf("%-10s x%-10d $%-8d\n","Adults", numAdults, adultCost);
 		System.out.printf("%-10s x%-10d $%-8d\n","Children", numChildren, childCost);
