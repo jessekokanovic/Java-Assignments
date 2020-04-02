@@ -23,23 +23,33 @@ public class TrainService {
 		}
 	}
 	
+	public int getDistance() {
+		//returns the distance traveled in the booking
+		
+		return (this.endPoint - this.startPoint);
+	}
+	
 	public void setStart(int start){
 		//sets the starting point of the booking
+		
 		this.startPoint = start;
 	}
 	
 	public void setEnd(int end){
 		//sets the end point of the booking
+		
 		this.startPoint = end;
 	}
 	
 	public void setClass(int trainClass){
 		//sets the starting point of the booking
+		
 		this.trainClass = trainClass;
 	}
 
 	public int checkSeats(int adults, int children) {
 		//checks the availability of seats and return either 1 or 0
+		
 		if(this.trainClass == 1) {
 			if(adults > firstSeats[this.startPoint]) {
 				return 0;
