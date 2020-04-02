@@ -36,19 +36,24 @@ public class BookingSystem {
 				System.out.println("\nPlease select your carriage:\n[1] First\n[2] Standard\n[3] Excursion");
 				int userChoice = Integer.parseInt(console.nextLine());
 				trainService.setClass(userChoice);
+				
 				System.out.println("\nPlease select your starting point:");
 				for(int i = 0; i < STATIONS.length;i++) {
 					System.out.printf("[%d] %s\n", i, STATIONS[i]);
 				}
-				trainService.setStart(Integer.parseInt(console.nextLine()));
+				int startPoint = Integer.parseInt(console.nextLine());
+				trainService.setStart(startPoint);
+				
 				System.out.println("\nPlease select your end point:");
 				for(int i = 0; i < STATIONS.length;i++) {
 					System.out.printf("[%d] %s\n", i, STATIONS[i]);
 				}
-				trainService.setEnd(Integer.parseInt(console.nextLine()));
+				int endPoint = Integer.parseInt(console.nextLine());
+				trainService.setEnd(endPoint);
 
 				//Determine pricing based on carriage type and passenger type/number 
 				if(userChoice == 1) {
+					trainService.setClass(1);
 					System.out.println("How many adults?");
 					numAdults = Integer.parseInt(console.nextLine());
 					numChildren = 0;
@@ -58,13 +63,16 @@ public class BookingSystem {
 						System.out.println("No seats available!");
 					}
 					else {
-						//Calculate cost, print receipt, adjust available seats
-						
+						//Calculate cost, print receipt
+						BookingReceipt receipt = new BookingReceipt(16, 0);
+						receipt.calculateCosts(trainService.getDistance(), this.numAdults, 0, 0);
+						receipt.printReceipt("First",STATIONS[startPoint] , STATIONS[endPoint], this.numAdults, 0, 0);
 						//Adjust available seats for every station between the starting point and the end point. 
 						trainService.adjustSeats(numAdults, numChildren);
 					}	
 				}
 				else if(userChoice == 2) {
+					trainService.setClass(2);
 					System.out.println("How many adults?");
 					numAdults = Integer.parseInt(console.nextLine());
 					System.out.println("How many Children (<18)?");
@@ -72,20 +80,22 @@ public class BookingSystem {
 					System.out.println("How many of these children are under 3 years old?");
 					youngChildren = Integer.parseInt(console.nextLine());
 					
-					if((numAdults + numChildren) > standardSeats[startPoint]) {
+					if(trainService.checkSeats(this.numAdults, this.numChildren) == 0) {
 					//determine if the booking can be accepted or not
 						System.out.println("No seats available!");
 					}
 					else {
 						//Calculate cost, print receipt, adjust available seats
-						printReceipt(STATIONS, 2, numAdults, numChildren, youngChildren, startPoint, endPoint);
+						BookingReceipt receipt = new BookingReceipt(11, 6);
+						receipt.calculateCosts(trainService.getDistance(), this.numAdults, this.numChildren, this.youngChildren);
+						receipt.printReceipt("First",STATIONS[startPoint] , STATIONS[endPoint], this.numAdults, this.numChildren, this.youngChildren);
 						//Adjust available seats for every station between the starting point and the end point. 
-						for (int i = startPoint; i <= endPoint; i++) {
-							standardSeats[i] = standardSeats[i] - (numAdults + numChildren);
+						trainService.adjustSeats(numAdults, numChildren);
 						}
 					}	
-				}
+				
 				else if(userChoice == 3) {
+					trainService.setClass(3);
 					System.out.println("How many adults?");
 					numAdults = Integer.parseInt(console.nextLine());
 					System.out.println("How many Children (<18)?");
@@ -93,18 +103,18 @@ public class BookingSystem {
 					System.out.println("How many of these children are under 3 years old?");
 					youngChildren = Integer.parseInt(console.nextLine());
 					
-					if((numAdults + numChildren) > excursionSeats[startPoint]) {
+					if(trainService.checkSeats(this.numAdults, this.numChildren) == 0) {
 					//determine if the booking can be accepted or not
 						System.out.println("No seats available!");
 					}
 					else {
 						//Calculate cost, print receipt, adjust available seats
-						printReceipt(STATIONS, 3, numAdults, numChildren, youngChildren, startPoint, endPoint);
+						BookingReceipt receipt = new BookingReceipt(11, 6);
+						receipt.calculateCosts(trainService.getDistance(), this.numAdults, this.numChildren, this.youngChildren);
+						receipt.printReceipt("First",STATIONS[startPoint] , STATIONS[endPoint], this.numAdults, this.numChildren, this.youngChildren);
 						//Adjust available seats for every station between the starting point and the end point. 
-						for (int i = startPoint; i <= endPoint; i++) {
-							excursionSeats[i] = excursionSeats[i] - (numAdults + numChildren);
-						}
-					}	
+						trainService.adjustSeats(numAdults, numChildren);
+						}	
 				}
 				//get the menu choice again
 				System.out.println(MENU);
