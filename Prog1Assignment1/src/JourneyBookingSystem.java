@@ -147,21 +147,22 @@ public class JourneyBookingSystem {
 			carriage = "Excursion Class";
 		}
 		
-		System.out.printf("%-6s %-6s %-6s\n","", carriage,"");
-		System.out.printf("%-6s %-6s %-6s\n",STATIONS[startPoint], "to",STATIONS[endPoint]);
-		System.out.println("------------------------------");
-		System.out.printf("%-10s x%-10d $%-8d\n","Adults", numAdults, adultCost);
-		System.out.printf("%-10s x%-10d $%-8d\n","Children", numChildren, childCost);
-		System.out.printf("%-10s x%-10d-$%-8d\n", "Free Child", youngChildren, childDiscount);
-		System.out.printf("%-10s x%-10d $%-8d\n", "Booking Fee", numAdults + (numChildren - youngChildren), (numAdults + (numChildren - youngChildren)) * 5);
+		System.out.printf("%-20s %-20s %-20s\n","", carriage,"");
+		System.out.printf("%-20s %-20s %-20s\n",STATIONS[startPoint], "to",STATIONS[endPoint]);
+		System.out.println("------------------------------------------------------");
+		System.out.printf("%-20s x%-20d $%-20d\n","Adults", numAdults, adultCost);
+		System.out.printf("%-20s x%-20d $%-20d\n","Children", numChildren, childCost);
+		System.out.printf("%-20s x%-20d-$%-20d\n", "Free Child", youngChildren, childDiscount);
+		System.out.printf("%-20s x%-20d $%-20d\n", "Booking Fee", numAdults + (numChildren - youngChildren), (numAdults + (numChildren - youngChildren)) * 5);
 		if((numAdults + numChildren) >=10) {
 			groupDiscount = 0.1 * (adultCost + childCost - childDiscount);
-			System.out.printf("%-10s x%-10s-$%-8d\n", "Group Discount", "", groupDiscount);
+			System.out.printf("%-20s  %-20s-$%-20.2f\n", "Group Discount", "10% Off", groupDiscount);
 		}
 		else {
 			groupDiscount = 0;
 		}
-		System.out.printf("%-10s  %-10s $%-8d\n", "TOTAL", "", adultCost + childCost - childDiscount - groupDiscount);
+		System.out.println("------------------------------------------------------");
+		System.out.printf("%-20s  %-20s $%-20.2f\n", "TOTAL", "", adultCost + childCost - childDiscount - groupDiscount);
 	}
 
 }
