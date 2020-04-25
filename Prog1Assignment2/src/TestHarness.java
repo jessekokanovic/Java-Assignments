@@ -76,6 +76,47 @@ public class TestHarness {
 			System.out.println("Booking unsuccessful.");
 		}
 		d123.displayDetails();
+		
+		//attempt to cancel B. Jones
+		int cancelSuccessful = d123.cancelReservation("B. Jones");
+		if(cancelSuccessful == 1) {
+			System.out.println("Reservation Cancelled.");
+		}
+		else {
+			System.out.println("Cancellation unsuccessful.");
+			
+		}
+		
+		//attempt to cancel R. Sharma
+		cancelSuccessful = d123.cancelReservation("R. Sharma");
+		if(cancelSuccessful == 1) {
+			System.out.println("Reservation Cancelled.");
+		}
+		else {
+			System.out.println("Cancellation unsuccessful.");
+			
+		}
+		
+		//Attempt to cancel A. Smith
+		cancelSuccessful = d123.cancelReservation("A. Smith");
+		if(cancelSuccessful == 1) {
+			System.out.println("Reservation Cancelled.");
+		}
+		else {
+			System.out.println("Cancellation unsuccessful.");
+		}
+		
+		//Attempt to cancel K. Nguyen
+		cancelSuccessful = d123.cancelReservation("K. Nguyen");
+		if(cancelSuccessful == 1) {
+			System.out.println("Reservation Cancelled.");
+		}
+		else {
+			System.out.println("Cancellation unsuccessful.");
+			
+		}
+		
+		d123.displayDetails(); //should show 3 seats available
 	}
 
 }

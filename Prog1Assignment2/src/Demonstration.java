@@ -88,5 +88,20 @@ public class Demonstration {
 			return 0;
 		}
 	}
+	
+	public int cancelReservation(String name) {
+		//Cancels a reservation if the name exists in the bookings
+		for(int i = 0;i < this.maxAttendance;i++ ) {
+			if(name== this.attendees[i][0]) {
+				this.attendees[i][0] = null;
+				this.attendees[i][1] = null ;
+				this.attendees[i][2] = null;
+				this.attendees[i][3] = null;
+				this.currentAttendance--;
+				return 1;
+			}
+		}
+		return 0;
+	}
 
 }
