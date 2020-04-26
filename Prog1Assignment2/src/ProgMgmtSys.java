@@ -1,15 +1,10 @@
 import java.util.Scanner;
 
 public class ProgMgmtSys {
-	//Program for managing demonstrations
-	
-	public ProgMgmtSys() {
-		
-		
-	}
 
-	public void main(String[] args) {
-		//Run the management system
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
 		String MENU = "[1] Add an event"
 				+ "[2] View specifc event\n"
 				+ "[3] View all events\n"
@@ -27,7 +22,7 @@ public class ProgMgmtSys {
 		currentNumEvents = 0;
 		
 		Scanner console = new Scanner(System.in);
-	
+		
 		//Get the menu selection from the user and perform the associated action
 		int menuChoice = Integer.parseInt(console.nextLine());
 		while(menuChoice != 7) {
@@ -81,6 +76,7 @@ public class ProgMgmtSys {
 				
 			}
 		}
-
+		
 	}
+
 }
