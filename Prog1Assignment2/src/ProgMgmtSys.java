@@ -5,7 +5,7 @@ public class ProgMgmtSys {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		String MENU = "[1] Add an event"
+		String MENU = "[1] Add an event\n"
 				+ "[2] View specifc event\n"
 				+ "[3] View all events\n"
 				+ "[4] View event statistics\n"
@@ -24,6 +24,7 @@ public class ProgMgmtSys {
 		Scanner console = new Scanner(System.in);
 		
 		//Get the menu selection from the user and perform the associated action
+		System.out.println(MENU);
 		int menuChoice = Integer.parseInt(console.nextLine());
 		while(menuChoice != 7) {
 			if(menuChoice == 1) {
@@ -46,7 +47,7 @@ public class ProgMgmtSys {
 					events[0][4]= console.nextLine();
 					System.out.println("Enter duration:");
 					events[0][5]= console.nextLine();
-					events[0][7] = "0";
+					events[0][6] = "0";
 					currentNumEvents++;
 				}
 				else {
@@ -60,19 +61,32 @@ public class ProgMgmtSys {
 					System.out.println("Enter maximum attendance:");
 					events[currentNumEvents + 1][3] = console.nextLine();
 					System.out.println("Enter start time:");
-					events[currentNumEvents + 1][5]= console.nextLine();
+					events[currentNumEvents + 1][4]= console.nextLine();
 					System.out.println("Enter duration:");
-					events[currentNumEvents + 1][6]= console.nextLine();
-					events[currentNumEvents + 1][7] = "0";
+					events[currentNumEvents + 1][5]= console.nextLine();
+					events[currentNumEvents + 1][6] = "0";
 					currentNumEvents++;
 				}
 				
+				//Get a new menu selection from the user
+				System.out.println(MENU);
 				menuChoice = Integer.parseInt(console.nextLine());
 			}
 			else if(menuChoice == 2) {
 				//Display the details of a specific event	
 				System.out.println("Enter the event ID of the demonstration you would like to see:");
 				String idToDisplay = console.nextLine();
+				int selectedEvent = 0;
+				for(int i = 0; i < numEvents;i++) {
+					//Loop over the array to find the event that matches the input ID
+					if(idToDisplay == events[i][0]) {
+						selectedEvent = i;
+					}
+				}
+				//make a demonstration object and use methods in Demonstration.java to display details
+				Demonstration displayEvent = new Demonstration(events[selectedEvent][0], events[selectedEvent][1], Integer.parseInt(events[selectedEvent][2]), 
+						Integer.parseInt(events[selectedEvent][3]), Integer.parseInt(events[selectedEvent][4]), Integer.parseInt(events[selectedEvent][5]));
+				displayEvent.displayDetails();
 				
 			}
 		}
