@@ -19,6 +19,13 @@ public class ProgMgmtSys {
 		String[][] events;
 		int currentNumEvents;
 		events = new String[numEvents][7];
+		//populate the array with all 0's so that I don't have to deal with null
+		for(int i = 0; i < numEvents;i++) {
+			for(int j = 0; j < 7;j++) {
+				events[i][j] = "0";
+			}
+		}
+		
 		currentNumEvents = 0;
 		
 		Scanner console = new Scanner(System.in);
@@ -49,6 +56,8 @@ public class ProgMgmtSys {
 					events[0][5]= console.nextLine();
 					events[0][6] = "0";
 					currentNumEvents++;
+					
+					System.out.println(events[0][0]);
 				}
 				else {
 					//Add a new event if there exists a first event already
@@ -77,16 +86,51 @@ public class ProgMgmtSys {
 				System.out.println("Enter the event ID of the demonstration you would like to see:");
 				String idToDisplay = console.nextLine();
 				int selectedEvent = 0;
+				int foundEvent = 0;
 				for(int i = 0; i < numEvents;i++) {
 					//Loop over the array to find the event that matches the input ID
-					if(idToDisplay == events[i][0]) {
+					if(idToDisplay.equals(events[i][0])){
+						foundEvent = 1;
 						selectedEvent = i;
 					}
 				}
+				System.out.println(selectedEvent);
+				if(foundEvent == 1) {
 				//make a demonstration object and use methods in Demonstration.java to display details
 				Demonstration displayEvent = new Demonstration(events[selectedEvent][0], events[selectedEvent][1], Integer.parseInt(events[selectedEvent][2]), 
 						Integer.parseInt(events[selectedEvent][3]), Integer.parseInt(events[selectedEvent][4]), Integer.parseInt(events[selectedEvent][5]));
 				displayEvent.displayDetails();
+				System.out.printf("%-20s%-20s%-20s\n", "", "AVAILABLE SEATS:", Integer.parseInt(events[selectedEvent][3]) - Integer.parseInt(events[selectedEvent][6]));
+				}
+				else if (foundEvent == 0){
+					//Let the user know that nothing could be displayed 
+					System.out.println("No event found!");
+				}
+				//Get a new menu selection from the user
+				System.out.println(MENU);
+				menuChoice = Integer.parseInt(console.nextLine());
+			}
+			else if(menuChoice == 3) {
+				//display the details for all the events
+				for(int i = 0; i < numEvents;i++) {
+					if(events[i][0].equals("0")) {
+						//if the event id is empty (equal to 0) do nothing
+						continue;
+					}
+					else{
+						//create a demonstration object and print the details
+						Demonstration displayEvent = new Demonstration(events[i][0], events[i][1], Integer.parseInt(events[i][2]), 
+								Integer.parseInt(events[i][3]), Integer.parseInt(events[i][4]), Integer.parseInt(events[i][5]));
+						displayEvent.displayDetails();
+						System.out.printf("%-20s%-20s%-20s\n", "", "AVAILABLE SEATS:", Integer.parseInt(events[i][3]) - Integer.parseInt(events[i][6]));
+					}
+					
+					//Get a new menu selection from the user
+					System.out.println(MENU);
+					menuChoice = Integer.parseInt(console.nextLine());	
+				}
+			}
+			else if(menuChoice == 4) {
 				
 			}
 		}

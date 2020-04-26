@@ -30,7 +30,7 @@ public class Demonstration {
 		System.out.printf("%-20s%-20s%-20s\n", "", "EVENT ID:", this.id);
 		System.out.printf("%-20s%-20s$%-20.2f\n", "", "BASE FEE:",this.baseFee);
 		System.out.printf("%-20s%-20s%-20s\n", "", "MAX ATTENDANCE:", this.maxAttendance);
-		System.out.printf("%-20s%-20s%-20s\n", "", "AVAILABLE SEATS:", this.maxAttendance - this.currentAttendance);
+		//System.out.printf("%-20s%-20s%-20s\n", "", "AVAILABLE SEATS:", this.maxAttendance - this.currentAttendance);
 		System.out.printf("%-20s%-20s%-20s\n", "", "START TIME:", this.startTime + " (24 Hour Time)");
 		System.out.printf("%-20s%-20s%-20s\n", "", "DURATION:", this.duration + " Minutes");		
 	}
@@ -92,11 +92,11 @@ public class Demonstration {
 	public int cancelReservation(String name) {
 		//Cancels a reservation if the name exists in the bookings
 		for(int i = 0;i < this.maxAttendance;i++ ) {
-			if(name== this.attendees[i][0]) {
-				this.attendees[i][0] = null;
-				this.attendees[i][1] = null ;
-				this.attendees[i][2] = null;
-				this.attendees[i][3] = null;
+			if(name.equals(this.attendees[i][0])) {
+				this.attendees[i][0] = "0";
+				this.attendees[i][1] = "0" ;
+				this.attendees[i][2] = "0";
+				this.attendees[i][3] = "0";
 				this.currentAttendance--;
 				return 1;
 			}
