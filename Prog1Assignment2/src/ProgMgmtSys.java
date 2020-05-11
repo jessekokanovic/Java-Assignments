@@ -16,10 +16,11 @@ public class ProgMgmtSys {
 		//Determines the max number of events that the system will handle
 		int numEvents = 5;
 		
+		String[][] eventAttendees = new String[numEvents][2];  
 		String[][] events;
 		int currentNumEvents;
 		events = new String[numEvents][7];
-		//populate the array with all 0's so that I don't have to deal with null
+		//populate the arrays with all 0's so that I don't have to deal with null
 		for(int i = 0; i < numEvents;i++) {
 			for(int j = 0; j < 7;j++) {
 				events[i][j] = "0";
@@ -43,7 +44,9 @@ public class ProgMgmtSys {
 				else if(currentNumEvents == 0){
 					//Add the first event to the array
 					System.out.println("Enter event ID:");
-					events[0][0] = console.nextLine();
+					String id = console.nextLine();
+					events[0][0] = id;
+					eventAttendees[0][0] = id;
 					System.out.println("Enter event title:");
 					events[0][1] = console.nextLine();
 					System.out.println("Enter event base fee:");
@@ -63,6 +66,9 @@ public class ProgMgmtSys {
 					//Add a new event if there exists a first event already
 					System.out.println("Enter event ID:");
 					events[currentNumEvents + 1][0] = console.nextLine();
+					String id = console.nextLine();
+					events[currentNumEvents + 1][0] = id;
+					eventAttendees[currentNumEvents + 1][0] = id;
 					System.out.println("Enter event title:");
 					events[currentNumEvents + 1][1] = console.nextLine();
 					System.out.println("Enter event base fee:");
@@ -131,6 +137,11 @@ public class ProgMgmtSys {
 				}
 			}
 			else if(menuChoice == 4) {
+				//Calculate and view event statistics
+			}
+			else if(menuChoice == 5) {
+				//Book a reservation for the specified event
+				
 				
 			}
 		}
