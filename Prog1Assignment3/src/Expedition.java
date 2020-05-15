@@ -23,8 +23,8 @@ public class Expedition {
 		this.startingStation = startingStation;
 		this.ticketTypeCost = ticketTypeCost;
 		this.ticketTypeDesc = ticketTypeDesc;
-		this.ticketTypeSold = new int[ticketTypeDesc.length];
-		for(int i=0; i<this.ticketTypeDesc.length;i++) {
+		this.ticketTypeSold = new int[getNumTicketTypes()];
+		for(int i=0; i<getNumTicketTypes();i++) {
 			ticketTypeSold[i] = 0;
 		}
 				
@@ -36,7 +36,7 @@ public class Expedition {
 
 	// Returns the number of different ticket types
 	public int getNumTicketTypes(){
-		return 0;
+		return this.ticketTypeDesc.length;
 	}
 	
 	// Returns the description of ticket type at index i
@@ -47,12 +47,34 @@ public class Expedition {
 	// Displays booking receipt.
 	// Accepts an array specifying the number of various ticket types required
 	public void displayReceipt(int ticketTypeQty[]) {
+		double cost = 0;
+		double total = 0;
+		System.out.printf("%-14s%-2s%-12s\n", "Id", ":", this.expeditionID);
+		System.out.printf("%-14s%-2s%-12s\n", "Description", ":", this.description);
+		System.out.printf("%-14s%-2s%-12s\n", "Start Station", ":", this.startingStation);
+		for(int i=0;i < getNumTicketTypes();i++) {
+			//for loop is used to account for different number of ticket types for different expeditions
+			cost = this.ticketTypeCost[i] * ticketTypeQty[i];
+			total = total + cost;
+			System.out.printf("%-14s%-2s%-2s%-2s$%-5s%-2s$%-5s\n", this.ticketTypeDesc[i], "*", ticketTypeQty[i], "@", this.ticketTypeCost[i], "=", cost);
+		}
+		System.out.printf("%-14s%-2s%-2s%-2s%-5s%-2s$%-5s\n", "Ticket Total", " ", " ", " "," ", " = ", total);
 	} 
 
 	// Makes a booking. Returns true if booking is successful.
 	// The method signature will need to be modified for stage D
 	public boolean makeBooking(int[] ticketTypeQty){
-		return false;
+		 if(ticketTypeQty.length == this.getNumTicketTypes()) {
+			 //if the booking we are trying to make matches the tickets available
+			 for(int i=0;i<getNumTicketTypes(); i++) {
+				 this.ticketTypeSold[i] = ticketTypeQty[i];
+			 }
+			 return true;
+		 }
+		 else {
+			 
+			 return false;
+		 }
 	}
 	
 	// Attempts to refund a booking. Parameter specifies how many of each
@@ -70,7 +92,7 @@ public class Expedition {
 		System.out.printf("%-14s%-2s%-12s\n", "Start Station", ":", this.startingStation);
 		System.out.printf("%-14s%-2s%-5s%-2s%-5s\n", "Ticket Type", ":", "Cost", ":", "#Sold");
 		System.out.println("--------------:------:------");
-		for(int i=0;i < ticketTypeDesc.length;i++) {
+		for(int i=0;i < getNumTicketTypes();i++) {
 			//for loop is used to account for different number of ticket types for different expeditions
 			System.out.printf("%-14s%-2s$%-5s%-2s%-5s\n", this.ticketTypeDesc[i], ":", this.ticketTypeCost[i], ":", this.ticketTypeSold[i]);
 		}
