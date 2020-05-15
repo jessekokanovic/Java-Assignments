@@ -82,7 +82,18 @@ public class Expedition {
 	// Returns false if refund can't be performed, true otherwise.
 	// The method signature will need to be modified for stage D
 	public boolean refundBooking(int[] refundTypeQty){
-		return false;
+		boolean success = false;
+		for(int i=0;i<getNumTicketTypes();i++) {
+			if(refundTypeQty[i] < this.ticketTypeSold[i]) {
+				this.ticketTypeSold[i] = this.ticketTypeSold[i] - refundTypeQty[i];
+				success = true;
+			}
+			else {
+				success = false;
+				break;
+			}
+		}
+		return success;
 	}
 	
 	// Display expedition details, including ticket types and associated costs
