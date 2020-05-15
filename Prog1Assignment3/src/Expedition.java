@@ -31,7 +31,7 @@ public class Expedition {
 	}
 			
 	public String getExpeditionID() {
-		return null;
+		return this.expeditionID;
 	}
 
 	// Returns the number of different ticket types
@@ -41,7 +41,7 @@ public class Expedition {
 	
 	// Returns the description of ticket type at index i
 	public String getTicketTypeDesc(int i) {
-		return null;
+		return this.ticketTypeDesc[i];
 	}
 
 	// Displays booking receipt.
