@@ -18,6 +18,16 @@ public class Expedition {
 					  String startingStation, double[] ticketTypeCost,
 					  String[] ticketTypeDesc) {
 		// Set up relevant attributes here
+		this.expeditionID = expeditionID;
+		this.description = description;
+		this.startingStation = startingStation;
+		this.ticketTypeCost = ticketTypeCost;
+		this.ticketTypeDesc = ticketTypeDesc;
+		this.ticketTypeSold = new int[ticketTypeDesc.length];
+		for(int i=0; i<this.ticketTypeDesc.length;i++) {
+			ticketTypeSold[i] = 0;
+		}
+				
 	}
 			
 	public String getExpeditionID() {
@@ -55,6 +65,15 @@ public class Expedition {
 	
 	// Display expedition details, including ticket types and associated costs
 	public void displayExpedition() {
+		System.out.printf("%-14s%-2s%-12s\n", "Id", ":", this.expeditionID);
+		System.out.printf("%-14s%-2s%-12s\n", "Description", ":", this.description);
+		System.out.printf("%-14s%-2s%-12s\n", "Start Station", ":", this.startingStation);
+		System.out.printf("%-14s%-2s%-5s%-2s%-5s\n", "Ticket Type", ":", "Cost", ":", "#Sold");
+		System.out.println("--------------:------:------");
+		for(int i=0;i < ticketTypeDesc.length;i++) {
+			//for loop is used to account for different number of ticket types for different expeditions
+			System.out.printf("%-14s%-2s$%-5s%-2s%-5s\n", this.ticketTypeDesc[i], ":", this.ticketTypeCost[i], ":", this.ticketTypeSold[i]);
+		}
 	}
 	
 	// Stage D: writes out all expedition data to file

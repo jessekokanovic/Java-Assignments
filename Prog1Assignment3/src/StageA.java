@@ -16,35 +16,35 @@ public class StageA {
 		System.out.println();
 		
 		// Request booking for 2 adults, 3 children, 1 concession
-		int [] bookTypeQty = {2, 3, 1};
-		if (expedition.makeBooking(bookTypeQty)) {
-			System.out.println("Booking successful");
-			expedition.displayReceipt(bookTypeQty);
-		}
-		else
-			System.out.println("Booking unsuccessful");
-		expedition.displayExpedition();
-		System.out.println();
-		
-		// Request refund for 1 adult, 2 children, 0 concessions
-		int [] refundTypeQty = {1, 2, 0};
-		if (expedition.refundBooking(refundTypeQty)) {
-			System.out.println("Refund of 1 adult, 2 children successful");
-			expedition.displayReceipt(refundTypeQty);
-		}
-		else
-			System.out.println("Refund of 1 adult, 2 children unsuccessful");
-		expedition.displayExpedition();
-		System.out.println();
-
-		// Request refund for 0 adults, 2 children, 0 concessions
-		int [] refundTypeQty2 = {0, 2, 0};
-		if (expedition.refundBooking(refundTypeQty2)) {
-			System.out.println("Refund of 2 children successful");
-			expedition.displayReceipt(refundTypeQty2);
-		}
-		else
-			System.out.println("Refund of 2 children unsuccessful");
-		expedition.displayExpedition();
+//		int [] bookTypeQty = {2, 3, 1};
+//		if (expedition.makeBooking(bookTypeQty)) {
+//			System.out.println("Booking successful");
+//			expedition.displayReceipt(bookTypeQty);
+//		}
+//		else
+//			System.out.println("Booking unsuccessful");
+//		expedition.displayExpedition();
+//		System.out.println();
+//		
+//		// Request refund for 1 adult, 2 children, 0 concessions
+//		int [] refundTypeQty = {1, 2, 0};
+//		if (expedition.refundBooking(refundTypeQty)) {
+//			System.out.println("Refund of 1 adult, 2 children successful");
+//			expedition.displayReceipt(refundTypeQty);
+//		}
+//		else
+//			System.out.println("Refund of 1 adult, 2 children unsuccessful");
+//		expedition.displayExpedition();
+//		System.out.println();
+//
+//		// Request refund for 0 adults, 2 children, 0 concessions
+//		int [] refundTypeQty2 = {0, 2, 0};
+//		if (expedition.refundBooking(refundTypeQty2)) {
+//			System.out.println("Refund of 2 children successful");
+//			expedition.displayReceipt(refundTypeQty2);
+//		}
+//		else
+//			System.out.println("Refund of 2 children unsuccessful");
+//		expedition.displayExpedition();
 	}
 }
