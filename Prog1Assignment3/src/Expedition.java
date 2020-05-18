@@ -23,6 +23,7 @@ public class Expedition {
 		this.startingStation = startingStation;
 		this.ticketTypeCost = ticketTypeCost;
 		this.ticketTypeDesc = ticketTypeDesc;
+		//set the default value of the number of tickets sold to zero
 		this.ticketTypeSold = new int[getNumTicketTypes()];
 		for(int i=0; i<getNumTicketTypes();i++) {
 			ticketTypeSold[i] = 0;

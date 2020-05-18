@@ -3,7 +3,7 @@
 import java.util.Scanner;
 
 public class StageB {
-	private static int MAX_EXPD = 4;
+	private static int MAX_EXPD = 1;
 	private static Expedition[] programme = new Expedition[MAX_EXPD];
 	private static int numExpeditions = 0; // the current number of expeditions
 
@@ -37,6 +37,7 @@ public class StageB {
 		   		break;
 		   	case "B":
 		   		displayExpedition();
+		   		
 		   		break;
 		   	case "C":
 		        displayAllExpeditions();
@@ -65,6 +66,37 @@ public class StageB {
 	// from user, create new expedition object and store in programme array.
 	// Display error message if array is full.
 	private static void addNewExpedition() {
+		
+		//check if there is space for a new expedition
+		if(numExpeditions < MAX_EXPD) {
+			//if there is space for one, add a new expedition
+			System.out.println("Expedition ID: ");
+			String newID = sc.nextLine();
+			System.out.println("Description: ");
+			String newDescription = sc.nextLine();
+			System.out.println("Starting Station: ");
+			String newStart = sc.nextLine();
+			System.out.println("Number of ticket types: ");
+			int numTypes = Integer.parseInt(sc.nextLine());
+			double[] newCosts = new double[numTypes];
+			System.out.println("Cost of tickets:");
+			for(int i=0; i<numTypes; i++) {
+				newCosts[i] = Double.parseDouble(sc.nextLine());
+			}
+			String[] newTickets = new String[numTypes];
+			System.out.println("Ticket Descriptions: ");
+			for(int i=0; i<numTypes; i++) {
+				newTickets[i] = sc.nextLine();
+			}
+			Expedition newExpedition = new Expedition(newID, newDescription, 
+					newStart, newCosts, newTickets);
+			programme[numExpeditions] = newExpedition;
+			numExpeditions++;
+		}
+		else {
+			//else we return an error message
+			System.out.println("Maximum number of expeditions already reached!");
+		}
 	}
 
 	// A possibly useful helper method for determining
@@ -80,17 +112,47 @@ public class StageB {
 
 	// Displays all expeditions
 	private static void displayAllExpeditions() {
+		for(int i=0; i<numExpeditions; i++) {
+			programme[i].displayExpedition();
+		}	
 	}
 
 	// Ask the user for an expeditionID and attempt to locate that expedition.
 	// Displays located expedition, or an error message if not located
 	private static void displayExpedition(){
+		System.out.println("Enter ID: ");
+		String targetID = sc.nextLine();
+		int idFound = findExpeditionPos(targetID);
+		if(idFound == -1) {
+			System.out.println("Expedition not found");
+		}
+		else {
+			programme[idFound].displayExpedition();
+		}
 	}
 
 	// Attempts to book an expedition ticket for a user specified expedition ID.
 	// Display error message if unable to book requested ticket for requested
 	// expedition
 	public static void bookExpeditionTicket() {
+		System.out.println("Expedition ID for booking: ");
+		String targetID = sc.nextLine();
+		int idFound = findExpeditionPos(targetID);
+		if(idFound == -1) {
+			System.out.println("Expedition not found");
+		}
+		else {
+			int bookingLength = programme[idFound].ticketTypeDesc.length;
+			int[] bookingTypeQty = new int[bookingLength];
+			for(int i=0; i < bookingLength; i++) {
+				System.out.println("Number of " + programme[idFound].getTicketTypeDesc(i) + " tickets:");
+				bookingTypeQty[i] = Integer.parseInt(sc.nextLine());
+			}
+			programme[idFound].makeBooking(bookingTypeQty);
+			System.out.println("Booking Successful!");
+			programme[idFound].displayReceipt(bookingTypeQty);
+		}
+		
 	}
 	
 	// Attempts to refund expedition tickets for a user specified expedition ID.
