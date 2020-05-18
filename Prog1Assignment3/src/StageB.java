@@ -148,9 +148,13 @@ public class StageB {
 				System.out.println("Number of " + programme[idFound].getTicketTypeDesc(i) + " tickets:");
 				bookingTypeQty[i] = Integer.parseInt(sc.nextLine());
 			}
-			programme[idFound].makeBooking(bookingTypeQty);
-			System.out.println("Booking Successful!");
-			programme[idFound].displayReceipt(bookingTypeQty);
+			if(programme[idFound].makeBooking(bookingTypeQty)) {
+				System.out.println("Booking Successful!");
+				programme[idFound].displayReceipt(bookingTypeQty);
+			}
+			else {
+				System.out.println("Booking Unsuccessful");
+			}
 		}
 		
 	}
@@ -159,6 +163,29 @@ public class StageB {
 	// Display error message if unable to refund for requested
 	// expedition
 	public static void refundExpeditionTicket() {
+		System.out.println("Expedition ID for refund: ");
+		String targetID = sc.nextLine();
+		int idFound = findExpeditionPos(targetID);
+		if(idFound == -1) {
+			System.out.println("Expedition not found");
+		}
+		else {
+			int refundLength = programme[idFound].ticketTypeDesc.length;
+			int[] refundTypeQty = new int[refundLength];
+			for(int i=0; i < refundLength; i++) {
+				System.out.println("Number of " + programme[idFound].getTicketTypeDesc(i) + " tickets:");
+				refundTypeQty[i] = Integer.parseInt(sc.nextLine());
+			}
+			if(programme[idFound].refundBooking(refundTypeQty)) {
+				System.out.println("Refund Successful!");
+				programme[idFound].displayReceipt(refundTypeQty);
+			}
+			else {
+				System.out.println("Refund Unsuccessful");
+			}
+		}
+		
+		
 	}
 	
 	// Stage D: loads all expedition data from a file
