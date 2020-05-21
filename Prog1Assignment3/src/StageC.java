@@ -4,7 +4,7 @@
 import java.util.Scanner;
 
 public class StageC {
-	private static int MAX_EXPD = 1;
+	private static int MAX_EXPD = 4;
 	private static Expedition[] programme = new Expedition[MAX_EXPD];
 	private static int numExpeditions = 0; // the current number of expeditions
 
