@@ -71,6 +71,8 @@ public class StageC {
 		//check if there is space for a new expedition
 		if(numExpeditions < MAX_EXPD) {
 			//if there is space for one, add a new expedition
+			System.out.println("Type of Expedition:\n[1]Self\n[2]Group");
+			int expeditionType = Integer.parseInt(sc.nextLine());
 			System.out.println("Expedition ID: ");
 			String newID = sc.nextLine();
 			System.out.println("Description: ");
@@ -89,9 +91,38 @@ public class StageC {
 			for(int i=0; i<numTypes; i++) {
 				newTickets[i] = sc.nextLine();
 			}
-			Expedition newExpedition = new Expedition(newID, newDescription, 
-					newStart, newCosts, newTickets);
-			programme[numExpeditions] = newExpedition;
+			if(expeditionType == 1) {
+				//add a new self expedition
+				System.out.println("End Station: ");
+				String endStation = sc.nextLine();
+				System.out.println("Difficulty: ");
+				String difficulty = sc.nextLine();
+				SelfExpedition newExpedition = new SelfExpedition(newID, newDescription, 
+						newStart, newCosts, newTickets, endStation, difficulty);
+				programme[numExpeditions] = newExpedition;
+
+			}
+			else if(expeditionType == 2){
+				//add a new group expedition
+				System.out.println("Bureau: ");
+				String bureau = sc.nextLine();
+				System.out.println("Bureau Phone: ");
+				String bureauNum = sc.nextLine();
+				System.out.println("Max Group Size: ");
+				int maxGroupSize = Integer.parseInt(sc.nextLine());
+				System.out.println("Number of Activities: ");
+				int numActivities = Integer.parseInt(sc.nextLine());
+				String[] activities = new String[numActivities];
+				System.out.println("Activity Names: ");
+				for(int i=0;i<numActivities;i++) {
+					activities[i] = sc.nextLine();
+				}
+				GroupExpedition newExpedition = new GroupExpedition(newID, newDescription, 
+						newStart, newCosts, newTickets, bureau, bureauNum, maxGroupSize, activities);
+				programme[numExpeditions] = newExpedition;
+			}
+			
+			
 			numExpeditions++;
 		}
 		else {

@@ -89,7 +89,7 @@ public class Expedition {
 	public boolean refundBooking(int[] refundTypeQty){
 		boolean success = false;
 		for(int i=0;i<getNumTicketTypes();i++) {
-			if(refundTypeQty[i] < this.ticketTypeSold[i]) {
+			if(refundTypeQty[i] <= this.ticketTypeSold[i]) {
 				this.ticketTypeSold[i] = this.ticketTypeSold[i] - refundTypeQty[i];
 				success = true;
 			}
