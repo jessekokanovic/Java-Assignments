@@ -34,6 +34,10 @@ public class Expedition {
 	public String getExpeditionID() {
 		return this.expeditionID;
 	}
+	
+	public String getDescription() {
+		return this.description;
+	}
 
 	// Returns the number of different ticket types
 	public int getNumTicketTypes(){
